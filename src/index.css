@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  /* Font roles and meaning:
+     --font-family-header: for large headings and titles,
+       e.g. page hero text and section headers (Montserrat).
+     --font-family-main: for primary body / paragraph text,
+       e.g. general content and readable copy (Inter).
+     --font-family-desc: for descriptive, caption, or smaller text,
+       e.g. subtitles, metadata, labels, and notes (Inter).
+  */
+  --font-family-header: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-family-main: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-desc: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --white: #fafafa;
+  --grey: #e7e7e7;
+  --dark-grey: #7f868b;
+  --light-pink: #ffccd6;
+  --pink: #f89dae;
+  --red: #dc1c33;
+  --middle-red: #c71b2b;
+  --dark-red: #950d1d;
+  --black: #051228;
+
+  --light-green: #819638;
+  --green: #4d6323;
+}
