@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Header from "./Header";
@@ -6,16 +6,22 @@ import NavigationSideBar from "./NavigationSideBar";
 
 export default function AppLayout() {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [desktopOpen, setDesktopOpen] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    setSidebarOpen(isDesktop);
-  }, [isDesktop]);
+  const sidebarOpen = isDesktop ? desktopOpen : mobileOpen;
 
-  const toggleSidebar = () => setSidebarOpen((open) => !open);
+  const toggleSidebar = () => {
+    if (isDesktop) {
+      setDesktopOpen((open) => !open);
+    } else {
+      setMobileOpen((open) => !open);
+    }
+  };
+
   const closeSidebar = () => {
     if (!isDesktop) {
-      setSidebarOpen(false);
+      setMobileOpen(false);
     }
   };
 
