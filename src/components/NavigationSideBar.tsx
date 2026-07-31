@@ -1,5 +1,5 @@
 import { PanelLeftClose } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import logo from "../assets/logoSvg.svg";
 import { NAV_ITEMS } from "../constants/navigation";
@@ -17,12 +17,15 @@ export default function NavigationSideBar({
   onClose,
   onToggle,
 }: NavigationSideBarProps) {
+  const { pathname } = useLocation();
   const collapsed = isDesktop && !open;
+  const isHome = pathname === "/home";
 
   return (
     <aside
       className={clsx(
-        "fixed top-0 left-0 z-40 flex h-screen flex-col border-r border-(--border-soft) bg-(--sidebar-bg) transition-all duration-300",
+        "fixed top-0 left-0 z-40 flex h-screen flex-col   bg-(--white) border-r border-(--border-soft) transition-all duration-400 ",
+        "ease-in-out ",
         isDesktop
           ? open
             ? "w-64"
@@ -34,7 +37,7 @@ export default function NavigationSideBar({
     >
       <div
         className={clsx(
-          "flex h-16 shrink-0 items-center border-b border-(--border-soft)",
+          "flex h-16 shrink-0 items-center ",
           collapsed ? "justify-center px-2" : "justify-between gap-2 px-4",
         )}
       >
@@ -48,15 +51,28 @@ export default function NavigationSideBar({
             <img src={logo} alt="Kata Team" className="h-10 w-10 rounded-full" />
           </button>
         ) : (
-          <div className="flex min-w-0 items-center gap-2.5">
-            <img src={logo} alt="Kata Team" className="h-10 w-10 shrink-0 rounded-full" />
+          <Link
+            to="/home"
+            replace={isHome}
+            onClick={(event) => {
+              if (isHome) {
+                event.preventDefault();
+              }
+            }}
+            className="flex min-w-0 items-center gap-2.5"
+          >
+            <img
+              src={logo}
+              alt="Kata Team"
+              className="h-10 w-10 shrink-0 rounded-full"
+            />
             <span
               className="truncate text-sm font-bold tracking-wide text-(--black) uppercase"
               style={{ fontFamily: "var(--font-family-header)" }}
             >
               Kata Team
             </span>
-          </div>
+          </Link>
         )}
 
         {isDesktop && !collapsed && (
@@ -71,7 +87,12 @@ export default function NavigationSideBar({
         )}
       </div>
 
-      <nav className={clsx("flex-1 overflow-y-auto py-4", collapsed ? "px-2" : "px-3")}>
+      <nav
+        className={clsx(
+          "flex-1 overflow-y-auto py-4",
+          collapsed ? "px-2" : "px-3",
+        )}
+      >
         <ul className="flex flex-col gap-1">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -85,7 +106,9 @@ export default function NavigationSideBar({
                   className={({ isActive }) =>
                     clsx(
                       "flex items-center rounded-xl transition-colors duration-200",
-                      collapsed ? "justify-center px-2 py-3" : "gap-3 px-3 py-2.5",
+                      collapsed
+                        ? "justify-center px-2 py-3"
+                        : "gap-3 px-3 py-2.5",
                       isActive
                         ? "bg-(--active-nav-bg) text-(--red)"
                         : "text-(--black) hover:bg-(--hover-nav-bg)",

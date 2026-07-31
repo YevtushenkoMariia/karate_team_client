@@ -22,22 +22,28 @@
   --text-3xl: 1.875rem;
 
   --white: #fafafa;
+  --dark-white: #f5f5f5;
+
+  --light-grey: #f5f5f5;
   --grey: #e7e7e7;
   --dark-grey: #7f868b;
+
+  --bg-light-pink: #FFF5F6;
   --light-pink: #ffccd6;
   --pink: #f89dae;
+
   --red: #dc1c33;
   --middle-red: #c71b2b;
   --dark-red: #950d1d;
   --black: #051228;
 
+  --super-light-green: #F0F5F0;
   --light-green: #819638;
   --green: #4d6323;
 
   /* Soft transitions between corporate colors */
-  --sidebar-bg: color-mix(in srgb, var(--grey) 55%, var(--white));
   --active-nav-bg: color-mix(in srgb, var(--light-pink) 70%, var(--white));
   --hover-nav-bg: color-mix(in srgb, var(--grey) 40%, var(--white));
-  --border-soft: color-mix(in srgb, var(--grey) 80%, var(--dark-grey) 20%);
-  --avatar-bg: color-mix(in srgb, var(--red) 12%, var(--white));
+  --border-soft: color-mix(in srgb, var(--light-grey) 80%, var(--dark-grey) 5%);
+  --avatar-bg: color-mix(in srgb, var(--light-green) 30%, var(--white));
 }

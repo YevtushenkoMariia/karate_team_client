@@ -1,4 +1,4 @@
-import { Bell, Menu } from "lucide-react";
+import { Bell, Menu, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logoSvg.svg";
 import { USER_KEY } from "../constants/storage";
@@ -17,12 +17,14 @@ function getStoredUser(): StoredUser {
   const raw = localStorage.getItem(USER_KEY);
 
   if (!raw) {
+    console.log("No user found");
     return {};
   }
 
   try {
     return JSON.parse(raw) as StoredUser;
-  } catch {
+  } catch (error) {
+    console.log("Error parsing user", error);
     return {};
   }
 }
@@ -39,11 +41,13 @@ export default function Header({
     [firstName, lastName].filter(Boolean).join(" ") || "Користувач";
   const avatarLetter = (firstName || displayName).charAt(0).toUpperCase();
 
-  const goToProfile = () => navigate("/profile");
+  const handleGoToProfile = () => navigate("/profile");
+
+  const handleGoHome = () => navigate("/home");
 
   return (
     <header className="sticky top-0 z-20 flex h-16 shrink-0 items-center justify-between gap-4 border-b border-(--border-soft) bg-(--white) px-4 sm:px-6">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         {showMenuButton && (
           <button
             type="button"
@@ -57,7 +61,7 @@ export default function Header({
 
         <button
           type="button"
-          onClick={() => navigate("/home")}
+          onClick={handleGoHome}
           className="flex items-center gap-2.5 lg:hidden"
         >
           <img src={logo} alt="Kata Team" className="h-9 w-9 rounded-full" />
@@ -68,24 +72,19 @@ export default function Header({
             Kata Team
           </span>
         </button>
+
       </div>
 
-      <div className="flex items-center gap-3 sm:gap-4">
-        <button
-          type="button"
-          aria-label="Сповіщення"
-          className="rounded-lg p-2 text-(--dark-grey) transition-colors hover:bg-(--hover-nav-bg) hover:text-(--black)"
-        >
-          <Bell className="h-5 w-5" />
-        </button>
+      <div className="flex items-center">
+       
 
         <button
           type="button"
-          onClick={goToProfile}
-          className="flex items-center gap-3 rounded-xl py-1.5 pr-2 pl-1.5 transition-colors hover:bg-(--hover-nav-bg)"
+          onClick={handleGoToProfile}
+          className="flex items-center gap-3 rounded-xl py-2 px-4 transition-colors hover:bg-(--hover-nav-bg)"
         >
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-(--avatar-bg) text-sm font-bold text-(--red)"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-(--avatar-bg) text-sm font-bold text-(--green)"
             style={{ fontFamily: "var(--font-family-header)" }}
           >
             {avatarLetter}
@@ -96,6 +95,22 @@ export default function Header({
           >
             {displayName}
           </span>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Сповіщення"
+          className="rounded-lg p-3 text-(--dark-grey) transition-colors hover:bg-(--hover-nav-bg) hover:text-(--black)"
+        >
+          <Bell className="h-5 w-5" />
+        </button>
+
+        <button
+          type="button"
+          aria-label="Settings"
+          className="rounded-lg p-3 text-(--dark-grey) transition-colors hover:bg-(--hover-nav-bg) hover:text-(--black)"
+        >
+          <Settings className="h-5 w-5" />
         </button>
       </div>
     </header>

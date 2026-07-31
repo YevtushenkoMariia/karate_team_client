@@ -6,6 +6,7 @@ import {
   ChartColumn,
   MessageSquare,
   User,
+  Settings,
   type LucideIcon,
 } from "lucide-react";
 
@@ -58,6 +59,12 @@ export const NAV_ITEMS: NavItem[] = [
     name: "Профіль",
     icon: User,
     path: "/profile",
+  },
+  {
+    id: "settings",
+    name: "Налаштування",
+    icon: Settings,
+    path: "/settings",
   },
 ];
 

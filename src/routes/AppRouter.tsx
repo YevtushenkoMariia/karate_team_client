@@ -10,6 +10,7 @@ import Sportsmens from "../pages/Sportsmens";
 import Statistics from "../pages/Statistics";
 import Messages from "../pages/Messages";
 import Profile from "../pages/Profile";
+import Settings from "../pages/Settings";
 import AppLayout from "../components/AppLayout";
 import type { Role } from "../types/auth.types";
 import { TOKEN_KEY, USER_KEY } from "../constants/storage";
@@ -80,6 +81,7 @@ export default function AppRouter() {
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
