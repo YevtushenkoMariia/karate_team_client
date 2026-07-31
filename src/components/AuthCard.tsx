@@ -9,7 +9,7 @@ type AuthCardProps = {
 export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
   return (
     <div className="w-full max-w-md">
-      <div className="mb-8 space-y-2">
+      <div className="mb-8 space-y-0">
         <h1
           className="text-3xl font-bold text-(--black)"
           style={{ fontFamily: 'var(--font-family-header)' }}
