@@ -3,18 +3,45 @@ import type { FormEvent } from 'react'
 import FormField from './FormField'
 import userIcon from '../assets/icons/user.svg'
 import lockIcon from '../assets/icons/lock.svg'
+import { authService } from '../services/auth'
+import { TOKEN_KEY, USER_KEY } from '../constants/storage'
+import { useNavigate } from 'react-router-dom';
 
-export default function LoginForm() {
+type LoginFormProps = {
+  onRegisterClick?: () => void
+}
+
+export default function LoginForm({ onRegisterClick }: LoginFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    // TODO: add actual login handling here
+
+
+
+    try {
+      const result = await authService.login({email, password});  
+      if(result.success == true) {
+        localStorage.setItem(TOKEN_KEY, result.token);
+        localStorage.setItem(USER_KEY, JSON.stringify(result.user));
+        navigate("/home");
+    
+        console.log("OK")
+      }else{
+        console.log("FAILED")
+        console.log(result);
+      }
+     
+
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   }
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <FormField
         id="email"
         type="email"
@@ -51,7 +78,11 @@ export default function LoginForm() {
 
       <p className="text-center text-sm text-(--dark-grey)">
         Не маєш профілю?{' '}
-        <button type="button" className="font-bold text-(--red) hover:text-(--dark-red)">
+        <button
+          type="button"
+          onClick={onRegisterClick}
+          className="font-bold text-(--red) hover:text-(--dark-red)"
+        >
           Зареєструватися
         </button>
       </p>

@@ -1,7 +1,7 @@
-import LogIn from './pages/LogIn'
+import AppRouter from './routes/AppRouter'
 
 function App() {
-  return <LogIn />
+  return <AppRouter />
 }
 
 export default App
