@@ -1,11 +1,11 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import FormField from "./FormField";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+
 import userIcon from "../assets/icons/user.svg";
 import mailIcon from "../assets/icons/mail.svg";
 import lockIcon from "../assets/icons/lock.svg";
-import eyeIcon from "../assets/icons/eye.svg";
-import eyeOffIcon from "../assets/icons/eye-off.svg";
 import type { Role } from "../types/auth.types";
 import { authService } from "../services/auth";
 import { TOKEN_KEY } from "../constants/storage";
@@ -17,7 +17,7 @@ type RegisterFormProps = {
 };
 
 export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
-  const [role, setRole] = useState<Role>("COACH");
+  const [role, setRole] = useState<Role>("SPORTSMAN");
   const [name, setFirstName] = useState("");
   const [surname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -65,17 +65,6 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
       <div className="flex rounded-2xl border border-(--grey) bg-(--grey)/30 p-1">
         <button
           type="button"
-          onClick={() => setRole("COACH")}
-          className={`h-8 flex-1 rounded-xl text-sm font-semibold transition ${
-            role === "COACH"
-              ? "bg-(--red) text-white"
-              : "text-(--dark-grey) hover:text-(--black)"
-          }`}
-        >
-          Тренер
-        </button>
-        <button
-          type="button"
           onClick={() => setRole("SPORTSMAN")}
           className={`h-8 flex-1 rounded-xl text-sm font-semibold transition ${
             role === "SPORTSMAN"
@@ -85,6 +74,18 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         >
           Спортсмен
         </button>
+        <button
+          type="button"
+          onClick={() => setRole("COACH")}
+          className={`h-8 flex-1 rounded-xl text-sm font-semibold transition ${
+            role === "COACH"
+              ? "bg-(--red) text-white"
+              : "text-(--dark-grey) hover:text-(--black)"
+          }`}
+        >
+          Тренер
+        </button>
+        
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -129,11 +130,8 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
             aria-label={showPassword ? "Приховати пароль" : "Показати пароль"}
             className="flex items-center"
           >
-            <img
-              src={showPassword ? eyeOffIcon : eyeIcon}
-              alt=""
-              className="h-5 w-5"
-            />
+            {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+         
           </button>
         }
       />
@@ -154,11 +152,8 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
             }
             className="flex items-center"
           >
-            <img
-              src={showConfirmPassword ? eyeOffIcon : eyeIcon}
-              alt=""
-              className="h-5 w-5"
-            />
+            {showConfirmPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+         
           </button>
         }
       />

@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import FormField from './FormField'
-import userIcon from '../assets/icons/user.svg'
-import lockIcon from '../assets/icons/lock.svg'
+import {User, Lock,  EyeIcon, EyeOffIcon  } from "lucide-react";
+
+
+
+
 import { authService } from '../services/auth'
 import { TOKEN_KEY, USER_KEY } from '../constants/storage'
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +17,7 @@ type LoginFormProps = {
 export default function LoginForm({ onRegisterClick }: LoginFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -48,16 +52,26 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
         placeholder="Електронна пошта"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        icon={<img src={userIcon} alt="" className="h-5 w-5" />}
+        icon={<User className="h-5 w-5" />}
       />
 
       <FormField
         id="password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         placeholder="Пароль"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-        icon={<img src={lockIcon} alt="" className="h-5 w-5" />}
+        icon={<Lock className="h-5 w-5" />}
+         trailing={
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            aria-label={showPassword ? "Приховати пароль" : "Показати пароль"}
+            className="flex items-center"
+          >
+            {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+          </button>
+        }
       />
 
       <div className="flex justify-end">
