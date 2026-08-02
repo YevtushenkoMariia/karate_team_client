@@ -1,14 +1,10 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import FormField from "./FormField";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-
-import userIcon from "../assets/icons/user.svg";
-import mailIcon from "../assets/icons/mail.svg";
-import lockIcon from "../assets/icons/lock.svg";
-import type { Role } from "../types/auth.types";
-import { authService } from "../services/auth";
-import { TOKEN_KEY } from "../constants/storage";
+import FormField from "../FormField";
+import { EyeIcon, EyeOffIcon, User, Mail, Lock } from "lucide-react";
+import type { Role } from "../../types/auth.types";
+import { authService } from "../../services/auth";
+import { TOKEN_KEY } from "../../constants/storage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -40,6 +36,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         confirmPassword,
         email,
       });
+      
       if (result.success === true) {
         localStorage.setItem(TOKEN_KEY, result.token);
         console.log(result.data);
@@ -56,8 +53,6 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         console.log(error.response?.data);
       }
     }
-
-    // TODO: add actual registration handling here
   };
 
   return (
@@ -95,7 +90,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
           placeholder="Прізвище"
           value={surname}
           onChange={(event) => setLastName(event.target.value)}
-          icon={<img src={userIcon} alt="" className="h-5 w-5" />}
+          icon={<User className="h-5 w-5" />}
         />
         <FormField
           id="firstName"
@@ -103,7 +98,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
           placeholder="Ім’я"
           value={name}
           onChange={(event) => setFirstName(event.target.value)}
-          icon={<img src={userIcon} alt="" className="h-5 w-5" />}
+          icon={<User className="h-5 w-5" />}
         />
       </div>
 
@@ -113,7 +108,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         placeholder="Електронна пошта"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        icon={<img src={mailIcon} alt="" className="h-5 w-5" />}
+        icon={<Mail className="h-5 w-5" />}
       />
 
       <FormField
@@ -122,7 +117,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         placeholder="Пароль"
         value={password}
         onChange={(event) => setPassword(event.target.value)}
-        icon={<img src={lockIcon} alt="" className="h-5 w-5" />}
+        icon={<Lock className="h-5 w-5" />}
         trailing={
           <button
             type="button"
@@ -142,7 +137,7 @@ export default function RegisterForm({ onLoginClick }: RegisterFormProps) {
         placeholder="Підтвердіть пароль"
         value={confirmPassword}
         onChange={(event) => setConfirmPassword(event.target.value)}
-        icon={<img src={lockIcon} alt="" className="h-5 w-5" />}
+        icon={<Lock className="h-5 w-5" />}
         trailing={
           <button
             type="button"

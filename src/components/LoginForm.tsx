@@ -7,7 +7,7 @@ import {User, Lock,  EyeIcon, EyeOffIcon  } from "lucide-react";
 
 
 import { authService } from '../services/auth'
-import { TOKEN_KEY, USER_KEY } from '../constants/storage'
+import { TOKEN_KEY, setStoredUser } from '../constants/storage'
 import { useNavigate } from 'react-router-dom';
 
 type LoginFormProps = {
@@ -29,7 +29,12 @@ export default function LoginForm({ onRegisterClick }: LoginFormProps) {
       const result = await authService.login({email, password});  
       if(result.success == true) {
         localStorage.setItem(TOKEN_KEY, result.token);
-        localStorage.setItem(USER_KEY, JSON.stringify(result.user));
+        setStoredUser({
+          id: result.user.id,
+          role: result.user.role,
+          name: result.user.name,
+          surname: result.user.surname,
+        });
         navigate("/home");
     
         console.log("OK")

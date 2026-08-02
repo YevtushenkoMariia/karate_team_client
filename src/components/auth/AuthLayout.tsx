@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 import clsx from 'clsx'
-import loginIllustration from '../assets/logoSvg.svg'
-import redWaves from '../assets/redWavesSvg.svg'
-import greenWaves from '../assets/greenWavesSvg.svg'
-import { useMediaQuery } from '../hooks/useMediaQuery'
+import loginIllustration from '../../assets/logoSvg.svg'
+import redWaves from '../../assets/redWavesSvg.svg'
+import greenWaves from '../../assets/greenWavesSvg.svg'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 type AuthLayoutProps = {
   children: ReactNode

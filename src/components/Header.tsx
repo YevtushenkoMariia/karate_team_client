@@ -1,48 +1,48 @@
 import { Bell, Menu, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logoSvg.svg";
-import { USER_KEY } from "../constants/storage";
-
-type StoredUser = {
-  name?: string;
-  surname?: string;
-};
+import {
+  getStoredUser,
+  USER_KEY,
+  USER_UPDATED_EVENT,
+} from "../constants/storage";
+import { GetAvatarLetter, GetDisplayName } from "../utils/profile";
+import { useEffect, useState } from "react";
 
 type HeaderProps = {
   onMenuClick?: () => void;
   showMenuButton?: boolean;
 };
 
-function getStoredUser(): StoredUser {
-  const raw = localStorage.getItem(USER_KEY);
-
-  if (!raw) {
-    console.log("No user found");
-    return {};
-  }
-
-  try {
-    return JSON.parse(raw) as StoredUser;
-  } catch (error) {
-    console.log("Error parsing user", error);
-    return {};
-  }
-}
-
 export default function Header({
   onMenuClick,
   showMenuButton = false,
 }: HeaderProps) {
   const navigate = useNavigate();
-  const user = getStoredUser();
-  const firstName = user.name?.trim() || "";
-  const lastName = user.surname?.trim() || "";
-  const displayName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Користувач";
-  const avatarLetter = (firstName || displayName).charAt(0).toUpperCase();
+  const [user, setUser] = useState(getStoredUser());
+
+  useEffect(() => {
+    const syncUser = () => setUser(getStoredUser());
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === USER_KEY || event.key === null) {
+        syncUser();
+      }
+    };
+
+    window.addEventListener(USER_UPDATED_EVENT, syncUser);
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      window.removeEventListener(USER_UPDATED_EVENT, syncUser);
+      window.removeEventListener("storage", handleStorage);
+    };
+  }, []);
+
+  const displayName = GetDisplayName(user?.name, user?.surname);
+  const avatarLetter = GetAvatarLetter(user?.name, user?.surname);
 
   const handleGoToProfile = () => navigate("/profile");
-
   const handleGoHome = () => navigate("/home");
 
   return (
@@ -72,12 +72,9 @@ export default function Header({
             Kata Team
           </span>
         </button>
-
       </div>
 
       <div className="flex items-center">
-       
-
         <button
           type="button"
           onClick={handleGoToProfile}
