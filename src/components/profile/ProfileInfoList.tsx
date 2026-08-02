@@ -14,7 +14,7 @@ export default function ProfileInfoList({ items }: ProfileInfoListProps) {
         <div key={item.label} className="py-2 first:pt-0">
           <dt className="text-xs text-[color:var(--dark-grey)]">{item.label}</dt>
           <dd className="mt-1 text-sm font-semibold text-[color:var(--black)]">
-            {item.value?.name ?? item.value}
+            {item.value}
           </dd>
         </div>
       ))}
