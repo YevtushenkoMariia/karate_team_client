@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import Plans from "../pages/Plans";
 import Groups from "../pages/Groups";
+import GroupInfo from "../pages/GroupInfo";
 import Sportsmens from "../pages/Sportsmens";
 import Statistics from "../pages/Statistics";
 import Messages from "../pages/Messages";
@@ -77,6 +78,7 @@ export default function AppRouter() {
         <Route path="/home" element={<Home />} />
         <Route path="/plans" element={<Plans />} />
         <Route path="/groups" element={<Groups />} />
+        <Route path="/groups/:groupId" element={<GroupInfo />} />
         <Route path="/sportsmens" element={<Sportsmens />} />
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/messages" element={<Messages />} />

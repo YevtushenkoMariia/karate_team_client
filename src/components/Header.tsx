@@ -8,6 +8,7 @@ import {
 } from "../constants/storage";
 import { GetAvatarLetter, GetDisplayName } from "../utils/profile";
 import { useEffect, useState } from "react";
+import { getAvatarColor } from "../utils/avatar";
 
 type HeaderProps = {
   onMenuClick?: () => void;
@@ -81,8 +82,11 @@ export default function Header({
           className="flex items-center gap-3 rounded-xl py-2 px-4 transition-colors hover:bg-(--hover-nav-bg)"
         >
           <span
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-(--avatar-bg) text-sm font-bold text-(--green)"
-            style={{ fontFamily: "var(--font-family-header)" }}
+            className="flex h-9 w-9 items-center justify-center rounded-full  
+            text-sm font-bold text-(--white)"
+            style={{ fontFamily: "var(--font-family-header)", 
+              backgroundColor: getAvatarColor(avatarLetter), }}
+             
           >
             {avatarLetter}
           </span>

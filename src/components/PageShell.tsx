@@ -19,7 +19,7 @@ export default function PageShell({ title, children }: PageShellProps) {
       >
         {pageTitle}
       </h1>
-      {children && <div className="mt-6">{children}</div>}
+      {children && <div className="mt-4">{children}</div>}
     </div>
   );
 }

@@ -13,5 +13,5 @@ export const getProfile = async (userData: ProfileRequest) => {
 
 export const updateProfile = async (userData: ProfileUpdateRequest) => {
   const response = await api.put("/api/user/profile-update", userData);
-  return response.data;
+  return response;
 };

@@ -1,9 +1,10 @@
-export function GetAvatarLetter(name: string | undefined, surname: string | undefined) {
-  if (name == null && surname == null) {
+
+export function GetAvatarLetter(name: string , surname: string) {
+  if ((name == null && surname == null) || (name == undefined && surname == undefined)) {
     return "";
   }
 
-  const letter = (name ?? surname)?.charAt(0)?.toUpperCase();
+  const letter = ((name)?.charAt(0) + (surname )?.charAt(0)).toUpperCase()  ;
 
   return letter ?? "";
 }

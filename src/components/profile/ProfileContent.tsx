@@ -22,6 +22,8 @@ import {
   GetRoleLabel,
 } from "../../utils/profile";
 import FieldRow from "./FieldRow";
+import { getAvatarColor } from "../../utils/avatar";
+import { toISOdate } from "../../utils/dataFormatter";
 
 type ProfileDraft = Partial<
   Omit<ProfileSportsmanData, "role"> & Omit<ProfileCoachData, "role">
@@ -54,7 +56,7 @@ export default function ProfileContent() {
     void loadProfile();
   }, [user?.id, user?.role]);
 
-  const avatarLetter = GetAvatarLetter(userData?.name, userData?.surname);
+  const avatarLetter = GetAvatarLetter(userData?.name ?? "", userData?.surname ?? "");
   const displayName = GetDisplayName(userData?.name, userData?.surname);
   const roleLabel = GetRoleLabel(userData?.role);
 
@@ -120,7 +122,7 @@ export default function ProfileContent() {
       email: draft.email,
       gender: draft.gender,
       phone_number: draft.phone_number,
-      birth_date: draft.birth_date,
+      birth_date: toISOdate(draft.birth_date),
       city: draft.city?.name?.trim() || undefined,
       club: draft.club?.name?.trim() || undefined,
       karate_level: draft.karate_level,
@@ -132,17 +134,18 @@ export default function ProfileContent() {
     console.log("Saving profile with payload:", payload);
 
     try {
-      const result = await userService.updateProfile(payload);
-      console.log("Profile updated successfully:", result);
+     
+      const updatedProfileData =  await userService.updateProfile(payload);
+      console.log("Profile updated successfully:", updatedProfileData);
 
       setStoredUser({
-        id: String(result.id),
-        name: result.name,
-        surname: result.surname,
-        role: result.role,
+        id: String(updatedProfileData.id),
+        name: updatedProfileData.name,
+        surname: updatedProfileData.surname,
+        role: updatedProfileData.role,
       });
 
-      const updatedProfile = result as ProfileSportsmanData | ProfileCoachData;
+      const updatedProfile = updatedProfileData as ProfileSportsmanData | ProfileCoachData;
       setUserData(updatedProfile);
       setDraft(updatedProfile);
       setIsEditing(false);
@@ -174,9 +177,12 @@ export default function ProfileContent() {
             )}
           >
             <div className="flex flex-col items-center md:items-start">
-              <div className="flex h-28 w-28 items-center justify-center self-center rounded-full bg-(--avatar-bg) ring-1 ring-[color:var(--light-green)]/20">
+              <div className="flex h-28 w-28 items-center justify-center self-center rounded-full  ring-1 ring-[color:var(--light-green)]/20"
+               style={{
+                            backgroundColor: getAvatarColor(avatarLetter),
+                          }}>
                 {avatarLetter ? (
-                  <span className="text-4xl font-bold text-(--light-green)">
+                  <span className="text-4xl font-bold text-(--white)">
                     {avatarLetter}
                   </span>
                 ) : (

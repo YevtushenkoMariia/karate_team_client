@@ -19,6 +19,10 @@ export class UserService {
     };
 
     const response = await getProfile(requestData);
+
+    response.data.birth_date =  new Date(response.data.birth_date).toLocaleDateString('uk-UA');
+
+
     return response.data;
   }
 
@@ -26,7 +30,11 @@ export class UserService {
     payload: ProfileUpdateRequest,
   ): Promise<ProfileUpdateResponse> {
     console.log("Updating profile with payload:", payload);
-    return updateProfile(payload);
+
+   const response = await updateProfile(payload);
+ response.data.birth_date =  new Date(response.data.birth_date).toLocaleDateString('uk-UA');
+
+    return response.data;
   }
 }
 

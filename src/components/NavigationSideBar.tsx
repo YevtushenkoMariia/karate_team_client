@@ -105,7 +105,7 @@ export default function NavigationSideBar({
                   title={collapsed ? item.name : undefined}
                   className={({ isActive }) =>
                     clsx(
-                      "flex items-center rounded-xl transition-colors duration-200",
+                      "flex items-center rounded-xl transition-colors duration-200 ",
                       collapsed
                         ? "justify-center px-2 py-3"
                         : "gap-3 px-3 py-2.5",
@@ -128,7 +128,7 @@ export default function NavigationSideBar({
                         <span
                           className={clsx(
                             "text-sm transition-colors",
-                            isActive ? "font-semibold" : "font-medium",
+                            isActive ? "font-bold" : "",
                           )}
                           style={{ fontFamily: "var(--font-family-main)" }}
                         >
