@@ -41,7 +41,7 @@ export default function Header({
   }, []);
 
   const displayName = GetDisplayName(user?.name, user?.surname);
-  const avatarLetter = GetAvatarLetter(user?.name, user?.surname);
+  const avatarLetter = GetAvatarLetter(user?.name ?? "", user?.surname ?? "");
 
   const handleGoToProfile = () => navigate("/profile");
   const handleGoHome = () => navigate("/home");
