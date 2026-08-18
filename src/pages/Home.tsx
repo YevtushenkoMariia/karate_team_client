@@ -1,5 +1,6 @@
+import MainContent from "../components/main/MainContent";
 import PageShell from "../components/PageShell";
 
 export default function Home() {
-  return <PageShell title="Головна" />;
+  return <PageShell title="Головна" children={<MainContent/>}/>;
 }
