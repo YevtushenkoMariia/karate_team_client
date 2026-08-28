@@ -10,13 +10,15 @@ import { getAvatarColor } from "../../utils/avatar";
 import type { GroupData } from "../../types/groups.types";
 import TABS, { type GroupTab } from "../../constants/groups";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-
+import { MOBILE_SIZE, TABLET_SIZE } from "../../constants/mediaQuery";
 
 const CARD_CLASSNAME =
   "rounded-[20px] border-2 border-(--grey) bg-(--white) shadow-xs";
 
 export default function GroupInfoContent() {
-  const isMobile = useMediaQuery("(max-width:768px)");
+  const isMobile = useMediaQuery(MOBILE_SIZE);
+   const isTablet = useMediaQuery(TABLET_SIZE)
+
 
   const { groupId } = useParams();
   const navigate = useNavigate();
@@ -79,8 +81,8 @@ export default function GroupInfoContent() {
       <button
         type="button"
         onClick={() => navigate("/groups")}
-        className="inline-flex items-center gap-2 rounded-xl px-2 py-2 font-family-desc
-          text-sm text-(--dark-grey) transition-colors
+        className="inline-flex items-center gap-2 rounded-xl pl-2 pr-4 py-2 
+          text-small text-(--dark-grey) transition-colors
           hover:bg-(--hover-nav-bg) hover:text-(--black)"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -92,24 +94,24 @@ export default function GroupInfoContent() {
           <GroupInfoSkeleton />
         ) : !group ? (
           <div className={clsx(CARD_CLASSNAME, "px-5 py-12 text-center")}>
-            <p className="font-family-desc text-sm font-medium text-(--red)">
+            <p className="font-family-desc text-body text-(--red)">
               {error || "Групу не знайдено"}
             </p>
           </div>
         ) : (
           <div className="flex flex-col gap-4">
-            <div className="-mx-1 overflow-x-auto px-1 pb-1">
-              <div className="inline-flex gap-1 rounded-full bg-(--light-grey) p-1">
+            <div className="-mx-1 overflow-x-auto ">
+              <div className="inline-flex w-full ">
                 {TABS.map((tab) => (
                   <button
                     key={tab.id}
                     type="button"
                     onClick={() => setActiveTab(tab.id)}
                     className={clsx(
-                      "rounded-full px-4 py-2 font-family-main text-sm whitespace-nowrap transition-colors sm:px-6",
+                      "px-4 py-2 text-small bg-(--white) whitespace-nowrap transition-colors sm:px-6 border-b-3 border(--white)",
                       activeTab === tab.id
-                        ? "bg-(--light-green) font-semibold text-(--white) shadow-xs"
-                        : "font-medium text-(--dark-grey) hover:bg-(--grey) hover:text-(--black)",
+                        ? " font-bold text-(--red) shadow-xs border-(--red) hover:bg-(--light-grey) hover:text-(--middle-red) hover:border-(--middle-red)"
+                        : " text-(--dark-grey) hover:bg-(--light-grey) hover:text-(--medium-black) border(--white)",
                     )}
                   >
                     {tab.label}
@@ -124,66 +126,67 @@ export default function GroupInfoContent() {
                   CARD_CLASSNAME,
                   "flex flex-col p-4 sm:flex-row sm:items-center ",
                   " min-w-04",
-                  isMobile ? "flex-col items-start gap-4" : "flex-row items-center gap-8",
-              
+                  isMobile
+                    ? "flex-col items-start gap-4"
+                    : "flex-row items-center gap-8",
                 )}
               >
-               
-                 
-                  <div
-                    className={clsx(
-                      "flex h-20 w-20 shrink-0 items-center justify-center",
-                      "rounded-full font-family-header text-[28px] text-(--white)",
-                      isMobile ? "self-center" : "",
-                    )}
-                    style={{ backgroundColor: getAvatarColor(group.name) }}
-                  >
-                    {group.name.charAt(0)}
+                <div
+                  className={clsx(
+                    "flex h-20 w-20 shrink-0 items-center justify-center",
+                    "rounded-full font-family-header text-[28px] text-(--white)",
+                    isMobile ? "self-center" : "",
+                  )}
+                  style={{ backgroundColor: getAvatarColor(group.name) }}
+                >
+                  {group.name.charAt(0)}
+                </div>
+
+                <div className="flex min-w-0 flex-col gap-2">
+                  <div className="flex items-center gap-2 text-(--dark-grey)">
+                    <UserRound size={16} className="shrink-0" />
+                    <span className="truncate text-small">
+                      Тренер: {authorName}
+                    </span>
                   </div>
 
-                  <div className="flex min-w-0 flex-col gap-2">
-                    <div className="flex items-center gap-2 text-(--dark-grey)">
-                      <UserRound size={16} className="shrink-0" />
-                      <span className="truncate font-family-desc text-sm">
-                        Тренер: {authorName}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-(--dark-grey)">
-                      <Users size={16} className="shrink-0" />
-                      <span className="font-family-desc text-sm">
-                        {formatMembersCount(group.membersCount ?? 0)}
-                      </span>
-                    </div>
+                  <div className="flex items-center gap-2 text-(--dark-grey)">
+                    <Users size={16} className="shrink-0" />
+                    <span className="text-small">
+                      {formatMembersCount(group.membersCount ?? 0)}
+                    </span>
                   </div>
+                </div>
 
-                  <div className="flex min-w-0 flex-col ">
-                
-                    <span className="truncate font-family-desc text-sm text-(--dark-grey)">
+                <div className={clsx("flex min-w-0 flex-col ",
+                  isMobile ? "ml-0" :
+                  isTablet ? "ml-8" : "ml-10",
+                )}>
+                  <span className="truncate text-small text-(--dark-grey)">
                     Код групи
-                      </span>
-                    <div className="inline-flex gap-2 rounded-full px-4 py-1">
-                      <span className="font-family-main text-sm font-semibold tracking-wide text-(--black)">
-                        {group.code || "—"}
-                      </span>
-                      <button
-                        type="button"
-                        aria-label={copied ? "Скопійовано" : "Копіювати код"}
-                        onClick={() => {
-                          void handleCopyCode();
-                        }}
-                        className="rounded-full p-1 text-(--dark-grey) transition-colors
-                        hover:bg-(--grey) hover:text-(--black)"
-                      >
-                        {copied ? (
-                          <Check className="h-4 w-4 text-(--light-green)" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
+                  </span>
+                  <div className="inline-flex gap-2 rounded-full px-4 py-1">
+                    <span className="text-small-bold tracking-wide text-(--black)">
+                      {group.code || "—"}
+                    </span>
+                    <button
+                      type="button"
+                      aria-label={copied ? "Скопійовано" : "Копіювати код"}
+                      onClick={() => {
+                        void handleCopyCode();
+                      }}
+                      className="rounded-sm p-1 text-(--dark-grey) transition-colors
+                        hover:bg-(--grey) hover:text-(--medium-black)"
+                    >
+                      {copied ? (
+                        <Check className="h-4 w-4 text-(--green)" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </button>
                   </div>
-              
+                </div>
+
               </div>
             )}
 

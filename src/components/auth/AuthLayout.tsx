@@ -4,14 +4,16 @@ import loginIllustration from '../../assets/logoSvg.svg'
 import redWaves from '../../assets/redWavesSvg.svg'
 import greenWaves from '../../assets/greenWavesSvg.svg'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { MOBILE_SIZE, TABLET_SIZE } from "../../constants/mediaQuery";
+
 
 type AuthLayoutProps = {
   children: ReactNode
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const isTablet = useMediaQuery('(min-width: 769px) and (max-width: 1024px)')
+  const isMobile = useMediaQuery(MOBILE_SIZE)
+  const isTablet = useMediaQuery(TABLET_SIZE)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">

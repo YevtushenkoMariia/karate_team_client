@@ -24,6 +24,7 @@ import {
 import FieldRow from "./FieldRow";
 import { getAvatarColor } from "../../utils/avatar";
 import { toISOdate } from "../../utils/dataFormatter";
+import { MOBILE_SIZE, TABLET_SIZE } from "../../constants/mediaQuery";
 
 type ProfileDraft = Partial<
   Omit<ProfileSportsmanData, "role"> & Omit<ProfileCoachData, "role">
@@ -32,8 +33,8 @@ type ProfileDraft = Partial<
 };
 
 export default function ProfileContent() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const isTablet = useMediaQuery("(min-width: 769px) and (max-width: 1024px)");
+  const isMobile = useMediaQuery(MOBILE_SIZE);
+  const isTablet = useMediaQuery(TABLET_SIZE);
 
   const user = getStoredUser();
   const [userData, setUserData] = useState<
@@ -45,8 +46,7 @@ export default function ProfileContent() {
 
   useEffect(() => {
     const loadProfile = async () => {
-      if (!user?.id || !user?.role) 
-        return;
+      if (!user?.id || !user?.role) return;
 
       const data = await userService.getProfileData(user.id, user.role);
       setUserData(data);
@@ -56,15 +56,12 @@ export default function ProfileContent() {
     void loadProfile();
   }, [user?.id, user?.role]);
 
-  const avatarLetter = GetAvatarLetter(userData?.name ?? "", userData?.surname ?? "");
+  const avatarLetter = GetAvatarLetter(
+    userData?.name ?? "",
+    userData?.surname ?? "",
+  );
   const displayName = GetDisplayName(userData?.name, userData?.surname);
   const roleLabel = GetRoleLabel(userData?.role);
-
-  const fieldControlClassName =
-    "mt-1 w-full bg-transparent text-sm font-semibold text-(--black) outline-none placeholder:font-normal placeholder:text-[color:var(--dark-grey)]";
-
-  const listClassName =
-    "flex flex-col divide-y divide-[color:var(--grey)]  py-4 ";
 
   const coachDisplayName =
     userData?.role === "SPORTSMAN" && userData.coach
@@ -134,8 +131,7 @@ export default function ProfileContent() {
     console.log("Saving profile with payload:", payload);
 
     try {
-     
-      const updatedProfileData =  await userService.updateProfile(payload);
+      const updatedProfileData = await userService.updateProfile(payload);
       console.log("Profile updated successfully:", updatedProfileData);
 
       setStoredUser({
@@ -145,7 +141,9 @@ export default function ProfileContent() {
         role: updatedProfileData.role,
       });
 
-      const updatedProfile = updatedProfileData as ProfileSportsmanData | ProfileCoachData;
+      const updatedProfile = updatedProfileData as
+        | ProfileSportsmanData
+        | ProfileCoachData;
       setUserData(updatedProfile);
       setDraft(updatedProfile);
       setIsEditing(false);
@@ -177,10 +175,12 @@ export default function ProfileContent() {
             )}
           >
             <div className="flex flex-col items-center md:items-start">
-              <div className="flex h-28 w-28 items-center justify-center self-center rounded-full  ring-1 ring-[color:var(--light-green)]/20"
-               style={{
-                            backgroundColor: getAvatarColor(avatarLetter),
-                          }}>
+              <div
+                className="flex h-28 w-28 items-center justify-center self-center rounded-full  ring-1 ring-[color:var(--light-green)]/20"
+                style={{
+                  backgroundColor: getAvatarColor(avatarLetter),
+                }}
+              >
                 {avatarLetter ? (
                   <span className="text-4xl font-bold text-(--white)">
                     {avatarLetter}
@@ -198,17 +198,21 @@ export default function ProfileContent() {
               {!isEditing ? (
                 <>
                   <div className="text-center md:text-left mb-4">
-                    <h1 className="text-xl font-bold text-(--black)">
+                    <h1 className="text-section-title text-(--black)">
                       {displayName}
                     </h1>
-                    <p className="mt-1 text-sm text-(--dark-grey)">
+                    <p className=" text-small text-(--dark-grey)">
                       {roleLabel}
                     </p>
                   </div>
 
                   <button
                     type="button"
-                    className="inline-flex w-full items-center justify-center gap-2 self-center rounded-full border border-(--grey) px-4 py-2 text-sm text-(--green) transition-colors hover:bg-(--avatar-bg) "
+                    className={clsx(
+                      "inline-flex w-full items-center justify-center",
+                      "gap-2 self-center rounded-full border border-(--grey) border-2 px-4 py-2",
+                      "text-button text-(--green) transition-colors hover:bg-(--avatar-bg) ",
+                    )}
                     onClick={() => {
                       setDraft(userData ?? {});
                       setIsEditing(true);
@@ -220,10 +224,14 @@ export default function ProfileContent() {
                 </>
               ) : (
                 <>
-                  <dl className={listClassName}>
+                  <dl className={ "flex flex-col divide-y divide-[color:var(--grey)]  py-2 "}>
                     <FieldRow label="Ім'я">
                       <input
-                        className={fieldControlClassName}
+                        className={clsx(
+                          "w-full bg-transparent text-small-bold ",
+                          "text-(--black) outline-none placeholder:font-normal",
+                          "placeholder:text-[color:var(--dark-grey)]",
+                        )}
                         value={draft.name ?? ""}
                         onChange={(event) =>
                           handleFieldChange("name", event.target.value)
@@ -234,7 +242,11 @@ export default function ProfileContent() {
 
                     <FieldRow label="Прізвище">
                       <input
-                        className={fieldControlClassName}
+                         className={clsx(
+                          "w-full bg-transparent text-small-bold ",
+                          "text-(--black) outline-none placeholder:font-normal",
+                          "placeholder:text-[color:var(--dark-grey)]",
+                        )}
                         value={draft.surname ?? ""}
                         onChange={(event) =>
                           handleFieldChange("surname", event.target.value)
@@ -269,7 +281,7 @@ export default function ProfileContent() {
           <div className="flex justify-end gap-3 px-4 pb-4">
             <button
               type="button"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-(--pink) px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-(--pink) px-5 py-2 text-button text-white transition-opacity hover:opacity-90"
               onClick={handleCancel}
             >
               <Undo2 className="h-4 w-4" />
@@ -277,7 +289,7 @@ export default function ProfileContent() {
             </button>
             <button
               type="button"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-(--light-green) px-5 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-(--light-green) px-5 py-2 text-button text-white transition-opacity hover:opacity-90"
               onClick={() => {
                 void handleSave();
               }}

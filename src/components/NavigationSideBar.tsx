@@ -105,13 +105,13 @@ export default function NavigationSideBar({
                   title={collapsed ? item.name : undefined}
                   className={({ isActive }) =>
                     clsx(
-                      "flex items-center rounded-xl transition-colors duration-200 ",
+                      "flex items-center rounded-xl transition-colors duration-200 text-nav",
                       collapsed
                         ? "justify-center px-2 py-3"
                         : "gap-3 px-3 py-2.5",
                       isActive
                         ? "bg-(--active-nav-bg) text-(--red)"
-                        : "text-(--black) hover:bg-(--hover-nav-bg)",
+                        : "text-(--medium-black) hover:bg-(--hover-nav-bg)",
                     )
                   }
                 >
@@ -120,7 +120,7 @@ export default function NavigationSideBar({
                       <Icon
                         className={clsx(
                           "h-5 w-5 shrink-0 transition-colors",
-                          isActive ? "text-(--red)" : "text-(--dark-grey)",
+                          isActive ? "text-(--red)" : "text-(--medium-grey)",
                         )}
                         strokeWidth={isActive ? 2.25 : 1.75}
                       />

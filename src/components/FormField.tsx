@@ -37,7 +37,8 @@ export default function FormField({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className={`w-full rounded-2xl border border-(--grey) bg-(--grey)/40 py-3.5 text-(--black) outline-none transition placeholder:text-(--dark-grey) focus:border-(--red) focus:bg-white ${
+        className={`w-full rounded-2xl border border-(--grey) bg-(--grey)/40 py-3.5 text-(--black) outline-none transition placeholder:text-(--dark-grey) focus:border-(--red) focus:border-[2px] text-placeholder
+          focus:bg-white ${
           icon ? 'pl-12' : 'pl-4'
         } ${trailing ? 'pr-12' : 'pr-4'}`}
         {...rest}

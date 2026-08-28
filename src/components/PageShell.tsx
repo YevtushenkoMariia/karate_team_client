@@ -14,7 +14,7 @@ export default function PageShell({ title, children }: PageShellProps) {
   return (
     <div>
       <h1
-        className="text-2xl font-bold text-(--black) sm:text-3xl"
+        className="text-page-title"
         style={{ fontFamily: "var(--font-family-header)" }}
       >
         {pageTitle}

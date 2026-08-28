@@ -7,7 +7,11 @@ import type {
 import { KarateLevel } from "../../types/karate_level";
 import { karateLevelConvertor } from "../../utils/sportsmen";
 import { getCities, getClubs } from "../../api/locations";
-import { STATUS_OPTIONS, FALLBACK_CLUBS, FALLBACK_CITIES } from "../../constants/profile";
+import {
+  STATUS_OPTIONS,
+  FALLBACK_CLUBS,
+  FALLBACK_CITIES,
+} from "../../constants/profile";
 import type { LocationOption } from "../../types/locations.type";
 import { GetDisplayName } from "../../utils/profile";
 
@@ -23,13 +27,16 @@ type ProfileDraft = Partial<
 type ProfileEditFormProps = {
   draft: ProfileDraft;
   role: ProfileSportsmanData["role"] | ProfileCoachData["role"] | undefined;
-  onFieldChange: (field: string, value: string | ProfileLocation | null) => void;
+  onFieldChange: (
+    field: string,
+    value: string | ProfileLocation | null,
+  ) => void;
 };
 
 const KARATE_LEVEL_OPTIONS = Object.values(KarateLevel);
 
 const fieldControlClassName =
-  "mt-1 w-full bg-transparent text-sm font-semibold text-(--black) outline-none placeholder:font-normal placeholder:text-[color:var(--dark-grey)]";
+  " w-full bg-transparent text-small-bold text-(--black) outline-none placeholder:text-[color:var(--dark-grey)]";
 
 export default function ProfileEditForm({
   draft,
@@ -74,23 +81,18 @@ export default function ProfileEditForm({
   return (
     <>
       <dl className={listClassName}>
-
-
-
-
         <FieldRow label="Електронна пошта">
           <input
-            className={fieldControlClassName}
+            className={  "mt-1 w-full bg-transparent text-sm font-semibold text-(--black) outline-none placeholder:font-normal placeholder:text-[color:var(--dark-grey)]"}
             value={draft.email ?? ""}
             onChange={(event) => onFieldChange("email", event.target.value)}
             placeholder="Електронна пошта"
           />
         </FieldRow>
 
-
         <FieldRow label="Номер телефону">
           <input
-            className={fieldControlClassName}
+            className={  "mt-1 w-full bg-transparent text-sm font-semibold text-(--black) outline-none placeholder:font-normal placeholder:text-[color:var(--dark-grey)]"}
             value={draft.phone_number ?? ""}
             onChange={(event) =>
               onFieldChange("phone_number", event.target.value)

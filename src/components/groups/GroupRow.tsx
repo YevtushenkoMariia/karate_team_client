@@ -12,7 +12,10 @@ interface GroupRowProps {
 
 export default function GroupRow({ groupData }: GroupRowProps) {
   const navigate = useNavigate();
-  const authorName = GetDisplayName(groupData.author?.name, groupData.author?.surname);
+  const authorName = GetDisplayName(
+    groupData.author?.name,
+    groupData.author?.surname,
+  );
 
   return (
     <div
@@ -55,8 +58,7 @@ export default function GroupRow({ groupData }: GroupRowProps) {
           {/* Main info */}
           <div className="min-w-0 text-left">
             <h3
-              className="truncate font-family-header text-xl
-              font-bold text-(--black)
+              className="truncate r text-body-bold -title text-(--black)
               "
             >
               {groupData.name}
@@ -68,9 +70,7 @@ export default function GroupRow({ groupData }: GroupRowProps) {
             "
               >
                 <UserRound size={16} />
-                <span className="font-family-desc text-sm overflow-hidden">
-                  {authorName}
-                </span>
+                <span className="text-small overflow-hidden">{authorName}</span>
               </div>
 
               <div
@@ -78,7 +78,7 @@ export default function GroupRow({ groupData }: GroupRowProps) {
               text-(--dark-grey)"
               >
                 <Users size={16} />
-                <span className="font-family-desc text-sm">
+                <span className="text-small">
                   {groupData.membersCount} members
                 </span>
               </div>

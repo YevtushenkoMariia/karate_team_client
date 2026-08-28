@@ -3,9 +3,10 @@ import { Outlet } from "react-router-dom";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import Header from "./Header";
 import NavigationSideBar from "./NavigationSideBar";
+import { DESKTOP_SIZE } from "../constants/mediaQuery";
 
 export default function AppLayout() {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isDesktop = useMediaQuery(DESKTOP_SIZE);
   const [desktopOpen, setDesktopOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
 

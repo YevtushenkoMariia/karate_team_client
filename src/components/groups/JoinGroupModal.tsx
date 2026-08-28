@@ -86,12 +86,12 @@ export default function JoinGroupModal({
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
             <h2
-              className="text-2xl font-bold text-(--black)"
+              className="text-modal-title text-(--black)"
               style={{ fontFamily: "var(--font-family-header)" }}
             >
               Приєднатися до групи
             </h2>
-            <p className="mt-1 text-sm text-(--dark-grey)">
+            <p className="text-small text-(--dark-grey)">
               Введіть код групи, щоб стати її учасником
             </p>
           </div>
@@ -125,14 +125,14 @@ export default function JoinGroupModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full px-5 py-2.5 text-sm font-medium text-(--dark-grey) transition-colors hover:bg-(--hover-nav-bg) hover:text-(--black)"
+              className="rounded-full px-5 py-2.5 text-button text-(--dark-grey) transition-colors hover:bg-(--hover-nav-bg) hover:text-(--black)"
             >
               Скасувати
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded-full bg-(--red) px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-(--middle-red) disabled:opacity-60"
+              className="rounded-full bg-(--red) px-5 py-2.5 text-button text-white transition hover:bg-(--middle-red) disabled:opacity-60"
             >
               {isSubmitting ? "Приєднання..." : "Приєднатися"}
             </button>

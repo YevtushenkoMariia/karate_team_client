@@ -65,9 +65,9 @@ export default function Header({
           onClick={handleGoHome}
           className="flex items-center gap-2.5 lg:hidden"
         >
-          <img src={logo} alt="Kata Team" className="h-9 w-9 rounded-full" />
+          <img src={logo} alt="Kata Team" className="h-8 w-8 rounded-full" />
           <span
-            className="text-sm font-bold tracking-wide text-(--black) uppercase"
+            className="text-section-body font-bold text-(--black) uppercase"
             style={{ fontFamily: "var(--font-family-header)" }}
           >
             Kata Team

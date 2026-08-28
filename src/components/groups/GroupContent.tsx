@@ -6,10 +6,11 @@ import { useCallback, useEffect, useState } from "react";
 import { groupService } from "../../services/groups";
 import { getStoredUser } from "../../constants/storage";
 import JoinGroupModal from "./JoinGroupModal";
+import { MOBILE_SIZE, TABLET_SIZE } from "../../constants/mediaQuery";
 
 export default function GroupContent() {
-  const isMobile = useMediaQuery("(max-width:768px)");
-  const isTablet = useMediaQuery("(min-width:769px) and (max-width:1024px)");
+  const isMobile = useMediaQuery(MOBILE_SIZE);
+  const isTablet = useMediaQuery(TABLET_SIZE);
 
   const user = getStoredUser();
   const canCreateGroup = user.role === "ADMIN" || user.role === "COACH";
@@ -36,10 +37,9 @@ export default function GroupContent() {
         <button
           type="button"
           onClick={() => setIsJoinOpen(true)}
-          className="inline-flex items-center gap-2 rounded-full bg-(--red) px-5 py-2.5
-            text-sm font-semibold text-(--white) shadow-xs
-            transition hover:bg-(--middle-red)
-            hover:shadow-[0_0px_8px_var(--pink)]"
+          className="inline-flex items-center gap-2 rounded-full bg-(--red) px-4 py-2.5
+            text-button text-(--white) shadow-xs
+            transition hover:bg-(--middle-red)"
         >
           <UserPlus size={18} />
           Приєднатися
@@ -61,11 +61,9 @@ export default function GroupContent() {
           <button
             className="flex items-center gap-2 rounded-full
             bg-(--red) px-4 py-4 shadow-xs 
-             hover:shadow-[0_0px_12px_var(--pink)]
-             text-(--white) text-bold"
+            text-(--white) text-button hover:bg-(--middle-red)"
           >
             <Plus size={20} />
-           
           </button>
         </div>
       )}
