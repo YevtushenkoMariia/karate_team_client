@@ -1,33 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Check, Copy, UserRound, Users } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import clsx from "clsx";
 import { groupService } from "../services/groups.services";
-import { GetDisplayName } from "../../../shared/utils/profile";
-import { formatMembersCount } from "../../../shared/utils/dataFormatter";
-import { getAvatarColor } from "../../../shared/utils/avatar";
 import type { GroupData } from "../types/groups.types";
 import TABS, { type GroupTab } from "../constants/groupsTabs.constants";
-import { useMediaQuery } from "../../../shared/hooks/useMediaQuery";
-import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
 import { useAuth } from "../../auth/hooks/useAuth";
+import GroupInfoTab from "./groupTabs/groupInfoTab";
+import GroupMembersTab from "./groupTabs/groupMembersTab";
+import GroupPlansTab from "./groupTabs/groupPlansTab";
+import type { GroupRequest } from "../types/groups.types";
 
 const CARD_CLASSNAME =
   "rounded-[20px] border-2 border-(--grey) bg-(--white) shadow-xs";
 
 export default function GroupInfoContent() {
-  const isMobile = useMediaQuery(MOBILE_SIZE);
-   const isTablet = useMediaQuery(TABLET_SIZE)
-
-
   const { groupId } = useParams();
   const navigate = useNavigate();
 
-const { user } = useAuth();
+  const { user } = useAuth();
   const [group, setGroup] = useState<GroupData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [copied, setCopied] = useState(false);
+
   const [activeTab, setActiveTab] = useState<GroupTab>("info");
 
   useEffect(() => {
@@ -38,8 +33,14 @@ const { user } = useAuth();
         return;
       }
 
+      const userData: GroupRequest = {
+        userId: user.id,
+        groupId,
+        role: user.role
+      }
+
       try {
-        const data = await groupService.getGroup(user.id, groupId, user.role);
+        const data = await groupService.getGroup(userData);
         setGroup(data);
         if (!data) {
           setError("Групу не знайдено");
@@ -54,23 +55,7 @@ const { user } = useAuth();
     void loadGroup();
   }, [user?.id, groupId]);
 
-  const handleCopyCode = async () => {
-    if (!group?.code) return;
-
-    try {
-      await navigator.clipboard.writeText(group.code);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
-  };
-
   const pageTitle = group?.name ?? "Група";
-  const authorName = GetDisplayName(
-    group?.author?.name,
-    group?.author?.surname,
-  );
 
   return (
     <div>
@@ -120,82 +105,14 @@ const { user } = useAuth();
               </div>
             </div>
 
-            {activeTab === "info" && (
-              <div
-                className={clsx(
-                  CARD_CLASSNAME,
-                  "flex flex-col p-4 sm:flex-row sm:items-center ",
-                  " min-w-04",
-                  isMobile
-                    ? "flex-col items-start gap-4"
-                    : "flex-row items-center gap-8",
-                )}
-              >
-                <div
-                  className={clsx(
-                    "flex h-20 w-20 shrink-0 items-center justify-center",
-                    "rounded-full font-family-header text-[28px] text-(--white)",
-                    isMobile ? "self-center" : "",
-                  )}
-                  style={{ backgroundColor: getAvatarColor(group.name) }}
-                >
-                  {group.name.charAt(0)}
-                </div>
-
-                <div className="flex min-w-0 flex-col gap-2">
-                  <div className="flex items-center gap-2 text-(--dark-grey)">
-                    <UserRound size={16} className="shrink-0" />
-                    <span className="truncate text-small">
-                      Тренер: {authorName}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-(--dark-grey)">
-                    <Users size={16} className="shrink-0" />
-                    <span className="text-small">
-                      {formatMembersCount(group.membersCount ?? 0)}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={clsx("flex min-w-0 flex-col ",
-                  isMobile ? "ml-0" :
-                  isTablet ? "ml-8" : "ml-10",
-                )}>
-                  <span className="truncate text-small text-(--dark-grey)">
-                    Код групи
-                  </span>
-                  <div className="inline-flex gap-2 rounded-full px-4 py-1">
-                    <span className="text-small-bold tracking-wide text-(--black)">
-                      {group.code || "—"}
-                    </span>
-                    <button
-                      type="button"
-                      aria-label={copied ? "Скопійовано" : "Копіювати код"}
-                      onClick={() => {
-                        void handleCopyCode();
-                      }}
-                      className="rounded-sm p-1 text-(--dark-grey) transition-colors
-                        hover:bg-(--grey) hover:text-(--medium-black)"
-                    >
-                      {copied ? (
-                        <Check className="h-4 w-4 text-(--green)" />
-                      ) : (
-                        <Copy className="h-4 w-4" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-            )}
+            {activeTab === "info" && <GroupInfoTab group={group} />}
 
             {activeTab === "plans" && (
-              <EmptyTab text="Плани для цієї групи з’являться пізніше" />
+              <GroupPlansTab groupId={group.id} />
             )}
 
             {activeTab === "members" && (
-              <EmptyTab text="Список учасників з’явиться пізніше" />
+              <GroupMembersTab groupId={group.id} />
             )}
           </div>
         )}
@@ -224,12 +141,3 @@ function GroupInfoSkeleton() {
   );
 }
 
-function EmptyTab({ text }: { text: string }) {
-  return (
-    <div className="rounded-[20px] border-4 border-dashed border-(--light-green) bg-(--white) px-4 py-16">
-      <p className="text-center font-family-desc text-sm text-(--dark-grey)">
-        {text}
-      </p>
-    </div>
-  );
-}

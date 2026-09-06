@@ -6,6 +6,12 @@ export type GroupsRequest = {
   role: Role;
 };
 
+export type GroupRequest = {
+  userId: string;
+  groupId: string | number;
+  role?: Role;
+};
+
 export type GroupAuthor = {
   id?: string | number;
   name: string;
@@ -21,5 +27,18 @@ export type GroupData = {
 };
 
 export type JoinGroupRequest = {
-  code: string;
+  userId: string;
+  groupCode: string;
 };
+
+export type GroupMembersRequest = {
+  userId: string;
+  groupId: string | number;
+};
+
+export type GroupMember = {
+  id: string | number;
+  name: string;
+  surname: string;
+  role: Role;
+}

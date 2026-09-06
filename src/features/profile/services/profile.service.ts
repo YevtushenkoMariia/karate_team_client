@@ -1,13 +1,23 @@
 import type { Role } from "../../auth/types/auth.types";
-import { getProfile, updateProfile } from "../api/profile.api";
+import type { IAuthApi } from "../api/api.interface";
+import { authApiInstance } from "../api/profile.api";
 import type {
   ProfileRequest,
-  ProfileUpdateRequest,
-  ProfileUpdateResponse,
+  ProfileUpdateRequest
 } from "../types/profile.types";
+import type { ProfileResponse } from "../types/response.type";
 
 export class UserService {
-  public async getProfileData(userId?: string, role?: Role) {
+  private auth: IAuthApi;
+
+  constructor(authApi: IAuthApi) {
+    this.auth = authApi;
+  }
+
+  public async getProfileData(
+    userId?: string,
+    role?: Role,
+  ): Promise<ProfileResponse | null> {
     if (!userId || !role) {
       console.error("User ID or role is missing. Cannot fetch profile data.");
       return null;
@@ -18,27 +28,27 @@ export class UserService {
       role,
     };
 
-    const response = await getProfile(requestData);
+    const response = await this.auth.getProfile(requestData);
 
-    response.data.birth_date = new Date(
-      response.data.birth_date,
-    ).toLocaleDateString("uk-UA");
+    response.birth_date = new Date(response.birth_date).toLocaleDateString(
+      "uk-UA",
+    );
 
-    return response.data;
+    return response;
   }
 
   public async updateProfile(
     payload: ProfileUpdateRequest,
-  ): Promise<ProfileUpdateResponse> {
+  ): Promise<ProfileResponse> {
     console.log("Updating profile with payload:", payload);
 
-    const response = await updateProfile(payload);
-    response.data.birth_date = new Date(
-      response.data.birth_date,
-    ).toLocaleDateString("uk-UA");
+    const response = await this.auth.updateProfile(payload);
+    response.birth_date = new Date(response.birth_date).toLocaleDateString(
+      "uk-UA",
+    );
 
-    return response.data;
+    return response;
   }
 }
 
-export const userService = new UserService();
+export const userService = new UserService(authApiInstance);

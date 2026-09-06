@@ -31,15 +31,23 @@ export default function GroupContent() {
         </button>
       </div>
 
-      <div
-        className={` mx-auto w-full grid gap-4 pb-28
+      {groups.length > 0 ? (
+        <div
+          className={` mx-auto w-full grid gap-4 pb-28
         ${isMobile ? "grid-cols-1 " : isTablet ? "grid-cols-2" : "grid-cols-2"}
       `}
-      >
-        {groups.map((group) => (
-          <GroupRow key={group.id} id={group.id} groupData={group} />
-        ))}
-      </div>
+        >
+          {groups.map((group) => (
+            <GroupRow key={group.id} id={group.id} groupData={group} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center p-8">
+          <p className="text-body text-(--dark-grey)">
+            У вас ще немає груп. Приєднайтесь до групи за кодом { user?.role != "SPORTSMAN" ? "або створіть нову" : "" }
+          </p>
+        </div>
+      )}
 
       {canCreateGroup && (
         <div className="fixed bottom-8 right-[24px] ">

@@ -4,6 +4,7 @@ import FormField from "../../../shared/components/FormField";
 import { groupService } from "../services/groups.services";
 import axios from "axios";
 import { useAuth } from "../../auth/hooks/useAuth";
+import type { JoinGroupRequest } from "../types/groups.types";
 
 type JoinGroupModalProps = {
   open: boolean;
@@ -19,6 +20,7 @@ export default function JoinGroupModal({
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (!open) {
@@ -51,13 +53,17 @@ export default function JoinGroupModal({
       return;
     }
 
-  const { user } = useAuth();
-  
     setIsSubmitting(true);
     setError("");
 
+    const userData: JoinGroupRequest = {
+      userId: user?.id ?? "",
+      groupCode: trimmedCode,
+    };
+
     try {
-      await groupService.joinGroup(user?.id, trimmedCode);
+      await groupService.joinGroup(userData);
+
       onJoined();
       onClose();
     } catch (joinError) {
@@ -65,7 +71,9 @@ export default function JoinGroupModal({
         const message =
           joinError.response?.data?.message ??
           "Не вдалося приєднатися. Перевірте код групи.";
-        setError(typeof message === "string" ? message : "Не вдалося приєднатися.");
+        setError(
+          typeof message === "string" ? message : "Не вдалося приєднатися.",
+        );
       } else {
         setError("Не вдалося приєднатися. Спробуйте ще раз.");
       }
@@ -107,7 +115,10 @@ export default function JoinGroupModal({
           </button>
         </div>
 
-        <form className="space-y-4" onSubmit={(event) => void handleSubmit(event)}>
+        <form
+          className="space-y-4"
+          onSubmit={(event) => void handleSubmit(event)}
+        >
           <FormField
             id="group-code"
             placeholder="Код групи"

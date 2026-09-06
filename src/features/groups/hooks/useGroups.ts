@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { groupService } from "../services/groups.services";
-import type { GroupData } from "../types/groups.types";
+import type { GroupData, GroupsRequest } from "../types/groups.types";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 export function useGroups() {
@@ -8,13 +8,22 @@ export function useGroups() {
 
   const [groups, setGroups] = useState<GroupData[]>([]);
 
-  const loadGroups = useCallback(async () => {
-    if (!user?.id || !user?.role) return;
+  const loadGroups = useCallback( async () => {
 
-    const retrievedGroups = await groupService.getGroups(user.id, user.role);
+    if (!user?.id || !user?.role){
+        console.error("USE GROUPS:User ID or role is missing. Cannot load groups.");
+        return;
+    }
+
+    const userData: GroupsRequest = {
+        userId: user.id,
+        role: user.role,
+    };
+
+    const retrievedGroups = await groupService.getGroups(userData);
 
     setGroups(retrievedGroups);
-  }, [user?.id, user?.role]);
+  }, [user]);
 
   useEffect(() => {
     void loadGroups();
