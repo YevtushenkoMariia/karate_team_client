@@ -22,6 +22,7 @@ import FieldRow from "./FieldRow";
 import { toISOdate } from "../../../shared/utils/dataFormatter";
 import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
 import { useAuth } from "../../auth/hooks/useAuth";
+import type { Role } from "../../../shared/types/roles";
 
 type ProfileDraft = Partial<
   Omit<ProfileSportsmanData, "role"> & Omit<ProfileCoachData, "role">
@@ -49,8 +50,8 @@ export default function ProfileContent() {
     try {
       const data = await userService.getProfileData(user.id, user.role);
 
-      setUserData(data);
-      setDraft(data ?? {});
+      setUserData(data as ProfileSportsmanData | ProfileCoachData | null);
+      setDraft(data as ProfileDraft);
     } catch (error) {
       console.error("Failed to load profile:", error);
     }
@@ -139,7 +140,7 @@ export default function ProfileContent() {
 
       const updatedUser = {
         id: String(updatedProfileData.id),
-        role: updatedProfileData.role,
+        role: updatedProfileData.role as Role,
         name: updatedProfileData.name,
         surname: updatedProfileData.surname,
       };

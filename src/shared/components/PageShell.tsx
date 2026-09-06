@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
-import { getNavTitle } from "../constants/navigation";
+import { getNavTitle } from "../utils/navigation";
+import { NAV_ITEMS } from "../constants/navigation";
 
 type PageShellProps = {
   title?: string;
@@ -9,7 +10,7 @@ type PageShellProps = {
 
 export default function PageShell({ title, children }: PageShellProps) {
   const { pathname } = useLocation();
-  const pageTitle = title ?? getNavTitle(pathname);
+const pageTitle = title ?? getNavTitle(pathname, NAV_ITEMS);
 
   return (
     <div>

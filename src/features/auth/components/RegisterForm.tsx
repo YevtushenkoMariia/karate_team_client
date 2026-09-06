@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import FormField from "../../../shared/components/FormField";
 import { EyeIcon, EyeOffIcon, User, Mail, Lock } from "lucide-react";
-import type { Role } from "../types/auth.types";
+import type { Role } from "../../../shared/types/roles";
 import { authService } from "../services/auth.service";
 import { TOKEN_KEY } from "../constants/storage.constants";
 import axios from "axios";

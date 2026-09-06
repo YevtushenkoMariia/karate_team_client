@@ -47,6 +47,8 @@ export class GroupsApi implements IGroupApi {
   ): Promise<GroupMember[]> {
     const { userId, groupId } = userData;
 
+    console.log(`Fetching members for userId: ${userId}, groupId: ${groupId}`);
+
     // const response = await api.get(`/api/${userId}/groups/${groupId}/members`);
 
     const response: GroupMember[] = [

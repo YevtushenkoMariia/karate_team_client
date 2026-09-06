@@ -1,4 +1,4 @@
-import type { Role } from "../../auth/types/auth.types";
+import type { Role } from "../../../shared/types/roles";
 import type { IAuthApi } from "../api/api.interface";
 import { authApiInstance } from "../api/profile.api";
 import type {

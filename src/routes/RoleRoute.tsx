@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
 
-import type { Role } from "../features/auth/types/auth.types";
+import type { Role } from "../shared/types/roles";
 import { useAuth } from "../features/auth/hooks/useAuth";
 
 type RoleRouteProps = {

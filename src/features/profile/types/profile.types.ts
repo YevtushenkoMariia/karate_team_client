@@ -1,4 +1,4 @@
-import { type Role } from "../../auth/types/auth.types";
+import { type Role } from "../../../shared/types/roles";
 import { type KarateLevel } from "../../../shared/types/karate_level";
 
 export type ProfileLocation = {
