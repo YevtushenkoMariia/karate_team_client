@@ -1,25 +1,30 @@
 @import "tailwindcss";
 
 @theme {
-  /* Font roles and meaning:
-     --font-family-header: for large headings and titles,
-       e.g. page hero text and section headers (Montserrat).
-     --font-family-main: for primary body / paragraph text,
-       e.g. general content and readable copy (Inter).
-     --font-family-desc: for descriptive, caption, or smaller text,
-       e.g. subtitles, metadata, labels, and notes (Inter).
-  */
-  --font-family-header: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  --font-family-main: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-family-desc: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* =========================
+     FONTS
+     ========================= */
 
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
+  --font-heading: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+
+
+  /* =========================
+     TYPOGRAPHY
+     ========================= */
+
+  --text-xs: 0.75rem;       /* 12px */
+  --text-sm: 0.875rem;      /* 14px */
+  --text-base: 1rem;        /* 16px */
+  --text-lg: 1.125rem;      /* 18px */
+  --text-xl: 1.25rem;       /* 20px */
+  --text-2xl: 1.5rem;       /* 24px */
+  --text-3xl: 1.875rem;     /* 30px */
+
+
+  /* =========================
+     COLORS
+     ========================= */
 
   --white: #fafafa;
   --dark-white: #f5f5f5;
@@ -28,22 +33,104 @@
   --grey: #e7e7e7;
   --dark-grey: #7f868b;
 
-  --bg-light-pink: #FFF5F6;
+  --bg-light-pink: #fff5f6;
   --light-pink: #ffccd6;
   --pink: #f89dae;
 
   --red: #dc1c33;
   --middle-red: #c71b2b;
   --dark-red: #950d1d;
+
   --black: #051228;
 
-  --super-light-green: #F0F5F0;
+  --medium-black: #596169;
+    --dark-grey: #7f868b;
+
+  --super-light-green: #f0f5f0;
   --light-green: #819638;
   --green: #4d6323;
 
-  /* Soft transitions between corporate colors */
-  --active-nav-bg: color-mix(in srgb, var(--light-pink) 70%, var(--white));
-  --hover-nav-bg: color-mix(in srgb, var(--grey) 40%, var(--white));
-  --border-soft: color-mix(in srgb, var(--light-grey) 80%, var(--dark-grey) 5%);
-  --avatar-bg: color-mix(in srgb, var(--light-green) 30%, var(--white));
+
+  /* =========================
+     UI
+     ========================= */
+
+  --active-nav-bg: color-mix(
+    in srgb,
+    var(--light-pink) 70%,
+    var(--white)
+  );
+
+  --hover-nav-bg: color-mix(
+    in srgb,
+    var(--grey) 40%,
+    var(--white)
+  );
+
+  --border-soft: color-mix(
+    in srgb,
+    var(--light-grey) 80%,
+    var(--dark-grey) 5%
+  );
+
+  --avatar-bg: color-mix(
+    in srgb,
+    var(--light-green) 30%,
+    var(--white)
+  );
+}
+
+@layer components {
+  .text-page-title {
+    @apply font-heading text-2xl font-bold text-(--black) sm:text-3xl;
+  }
+
+   .text-modal-title {
+    @apply font-heading text-2xl font-bold text-(--black);
+  }
+
+  .text-section-title {
+    @apply font-heading text-xl font-semibold text-(--black);
+  }
+
+  .text-body {
+    @apply font-body text-base font-normal text-(--black);
+  }
+
+  .text-body-bold {
+    @apply font-body text-base font-bold text-(--black);
+  }
+
+  .text-label {
+    @apply text-xs text-(--dark-grey);
+  }
+
+  .text-caption {
+    @apply font-body text-sm font-normal text-(--dark-grey);
+  }
+
+  .text-button {
+    @apply font-body text-base font-semibold;
+  }
+
+  .text-small {
+  @apply  text-sm;
+}
+
+.text-small-bold {
+  @apply text-sm font-semibold;
+}
+
+  .text-placeholder{
+     @apply text-base text-(--dark-grey);
+ 
+  }
+
+  .text-nav{
+    
+    @apply font-bold text-base text-(--dark-grey);
+  
+  }
+
+
 }
