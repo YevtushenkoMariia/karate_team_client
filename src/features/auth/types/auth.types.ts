@@ -1,4 +1,5 @@
 
+import type { Role } from "../../../shared/types/roles";
 
 export type LoginRequest = {
   email: string;
@@ -14,7 +15,6 @@ export type RegisterRequest = {
   confirmPassword: string
 };
 
-export type Role = "ADMIN" | "SPORTSMAN" | "COACH";
 
 export type StoredUserData = {
   id: string;

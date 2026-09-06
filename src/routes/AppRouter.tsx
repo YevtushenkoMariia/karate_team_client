@@ -16,9 +16,7 @@ import AppLayout from "../shared/layout/AppLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 
-import type { Role } from "../features/auth/types/auth.types";
-
-const APP_ROLES: Role[] = ["ADMIN", "COACH", "SPORTSMAN"];
+import { APP_ROLES } from "../shared/constants/appRoles";
 
 export default function AppRouter() {
   return (
@@ -41,7 +39,15 @@ export default function AppRouter() {
         <Route path="/plans" element={<Plans />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/groups/:groupId" element={<GroupInfo />} />
-        <Route path="/sportsmens" element={<Sportsmens />} />
+
+        <Route
+          path="/sportsmens"
+          element={
+            <RoleRoute allowedRoles={["ADMIN", "COACH"]}>
+              <Sportsmens />
+            </RoleRoute>
+          }
+        />
         <Route path="/statistics" element={<Statistics />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/profile" element={<Profile />} />

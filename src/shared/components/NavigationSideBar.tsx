@@ -3,6 +3,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import logo from "../../assets/logoSvg.svg";
 import { NAV_ITEMS } from "../constants/navigation";
+import { useAuth } from "../../features/auth/hooks/useAuth";
+import { getNavItems } from "../utils/navigation";
 
 type NavigationSideBarProps = {
   open: boolean;
@@ -20,6 +22,9 @@ export default function NavigationSideBar({
   const { pathname } = useLocation();
   const collapsed = isDesktop && !open;
   const isHome = pathname === "/home";
+  const {user} = useAuth();
+
+  const navigationList = getNavItems(user?.role, NAV_ITEMS);
 
   return (
     <aside
@@ -94,7 +99,7 @@ export default function NavigationSideBar({
         )}
       >
         <ul className="flex flex-col gap-1">
-          {NAV_ITEMS.map((item) => {
+          {navigationList.map((item) => {
             const Icon = item.icon;
 
             return (

@@ -8,7 +8,6 @@ import type {
 } from "../types/groups.types";
 import api from "../../../shared/api/axios.api";
 import type { IGroupApi } from "./group.interface";
-import {type Role} from "../../auth/types/auth.types";
 
 export class GroupsApi implements IGroupApi {
   public async getGroups(userData: GroupsRequest): Promise<GroupData[]> {
