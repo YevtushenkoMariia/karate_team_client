@@ -13,8 +13,7 @@ import {
   FALLBACK_CITIES,
 } from "../../../constants/profile";
 import type { LocationOption } from "../types/locations.type";
-import { GetDisplayName } from "../../../shared/utils/profile";
-
+import { userFormatter } from "../../../shared/utils/profile";
 import { normalizeOptions } from "../../../shared/utils/locations";
 import FieldRow from "./FieldRow";
 
@@ -193,7 +192,7 @@ export default function ProfileEditForm({
               className={fieldControlClassName}
               value={
                 draft.coach
-                  ? GetDisplayName(draft.coach.name, draft.coach.surname)
+                  ? userFormatter.GetDisplayName(draft.coach.name, draft.coach.surname)
                   : ""
               }
               placeholder="Тренер"

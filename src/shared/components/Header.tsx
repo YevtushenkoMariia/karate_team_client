@@ -1,8 +1,7 @@
 import { Bell, Menu, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logoSvg.svg";
-import { GetAvatarLetter, GetDisplayName } from "../utils/profile";
-import { getAvatarColor } from "../utils/avatar";
+import { userFormatter } from "../utils/profile";
 import { useAuth } from "../../features/auth/hooks/useAuth";
 
 type HeaderProps = {
@@ -17,9 +16,9 @@ export default function Header({
    const navigate = useNavigate();
   const { user } = useAuth();
 
-  const displayName = GetDisplayName(user?.name, user?.surname);
+  const displayName = userFormatter.GetDisplayName(user?.name, user?.surname);
 
-  const avatarLetter = GetAvatarLetter(
+  const avatarLetter = userFormatter.GetAvatarLetter(
     user?.name ?? "",
     user?.surname ?? "",
   );
@@ -66,7 +65,7 @@ export default function Header({
             className="flex h-9 w-9 items-center justify-center rounded-full  
             text-sm font-bold text-(--white)"
             style={{ fontFamily: "var(--font-family-header)", 
-              backgroundColor: getAvatarColor(avatarLetter), }}
+              backgroundColor: userFormatter.getAvatarColor(avatarLetter), }}
              
           >
             {avatarLetter}

@@ -7,7 +7,8 @@ import type {
   GroupMember,
 } from "../types/groups.types";
 import api from "../../../shared/api/axios.api";
-import type { IGroupApi } from "../services/group.interface";
+import type { IGroupApi } from "./group.interface";
+import {type Role} from "../../auth/types/auth.types";
 
 export class GroupsApi implements IGroupApi {
   public async getGroups(userData: GroupsRequest): Promise<GroupData[]> {
@@ -46,10 +47,32 @@ export class GroupsApi implements IGroupApi {
     userData: GroupMembersRequest,
   ): Promise<GroupMember[]> {
     const { userId, groupId } = userData;
-    const response = await api.get(`/api/${userId}/groups/${groupId}/members`);
+
+    // const response = await api.get(`/api/${userId}/groups/${groupId}/members`);
+
+    const response: GroupMember[] = [
+        {
+            id: 1,
+            name: "John",
+            surname: "Doe",
+            role: 'ADMIN',
+        },
+        {
+            id: 2,
+            name: "Jane",
+            surname: "Smith",
+            role: 'SPORTSMAN',
+        },
+        {
+            id: 3,
+            name: "Alice",
+            surname: "Johnson",
+            role: 'SPORTSMAN',
+        }
+    ]
 
     console.log("getGroupMembers response:", response);
-    return response.data;
+    return response;
   }
 }
 

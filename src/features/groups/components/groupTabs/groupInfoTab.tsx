@@ -4,9 +4,8 @@ import {
   TABLET_SIZE,
 } from "../../../../shared/constants/mediaQuery";
 import { useMediaQuery } from "../../../../shared/hooks/useMediaQuery";
-import { getAvatarColor } from "../../../../shared/utils/avatar";
 import { formatMembersCount } from "../../../../shared/utils/dataFormatter";
-import { GetDisplayName } from "../../../../shared/utils/profile";
+import {  userFormatter } from "../../../../shared/utils/profile";
 import type { GroupData } from "../../types/groups.types";
 import { Check, Copy, UserRound, Users } from "lucide-react";
 import clsx from "clsx";
@@ -19,7 +18,7 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
   const isMobile = useMediaQuery(MOBILE_SIZE);
   const isTablet = useMediaQuery(TABLET_SIZE);
 
-  const authorName = GetDisplayName(
+  const authorName = userFormatter.GetDisplayName(
     group?.author?.name,
     group?.author?.surname,
   );
@@ -53,9 +52,9 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
           "rounded-full font-family-header text-[28px] text-(--white)",
           isMobile ? "self-center" : "",
         )}
-        style={{ backgroundColor: getAvatarColor(group.name) }}
+        style={{ backgroundColor: userFormatter.getAvatarColor(group.name) }}
       >
-        {group.name.charAt(0)}
+        {userFormatter.GetAvatarLetter(group.name, group.author?.surname)}
       </div>
 
       <div className="flex min-w-0 flex-col gap-2">

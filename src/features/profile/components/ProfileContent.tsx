@@ -16,12 +16,9 @@ import {
   sportsmeStatusConvertor,
 } from "../../../shared/utils/sportsmen";
 import {
-  GetAvatarLetter,
-  GetDisplayName,
-  GetRoleLabel,
+  userFormatter,
 } from "../../../shared/utils/profile";
 import FieldRow from "./FieldRow";
-import { getAvatarColor } from "../../../shared/utils/avatar";
 import { toISOdate } from "../../../shared/utils/dataFormatter";
 import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
 import { useAuth } from "../../auth/hooks/useAuth";
@@ -62,16 +59,16 @@ export default function ProfileContent() {
   void loadProfile();
 }, [user?.id, user?.role]);
 
-  const avatarLetter = GetAvatarLetter(
+  const avatarLetter = userFormatter.GetAvatarLetter(
     userData?.name ?? "",
     userData?.surname ?? "",
   );
-  const displayName = GetDisplayName(userData?.name, userData?.surname);
-  const roleLabel = GetRoleLabel(userData?.role);
+  const displayName = userFormatter.GetDisplayName(userData?.name, userData?.surname);
+  const roleLabel = userFormatter.GetRoleLabel(userData?.role);
 
   const coachDisplayName =
     userData?.role === "SPORTSMAN" && userData.coach
-      ? GetDisplayName(userData.coach.name, userData.coach.surname)
+      ? userFormatter.GetDisplayName(userData.coach.name, userData.coach.surname)
       : "—";
 
   const generalInfoItems = [
@@ -186,7 +183,7 @@ export default function ProfileContent() {
               <div
                 className="flex h-28 w-28 items-center justify-center self-center rounded-full  ring-1 ring-[color:var(--light-green)]/20"
                 style={{
-                  backgroundColor: getAvatarColor(avatarLetter),
+                  backgroundColor: userFormatter.getAvatarColor(avatarLetter),
                 }}
               >
                 {avatarLetter ? (

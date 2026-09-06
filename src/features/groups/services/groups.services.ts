@@ -6,7 +6,7 @@ import type {
   GroupsRequest,
   JoinGroupRequest,
 } from "../types/groups.types";
-import type { IGroupApi } from "./group.interface";
+import type { IGroupApi } from "../api/group.interface";
 import { groupApiInstance } from "../api/groups";
 
 export class GroupsService {

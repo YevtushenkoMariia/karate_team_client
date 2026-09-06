@@ -2,8 +2,7 @@ import { Users, UserRound, MoreVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import type { GroupData } from "../types/groups.types";
-import { getAvatarColor } from "../../../shared/utils/avatar";
-import { GetDisplayName } from "../../../shared/utils/profile";
+import {  userFormatter } from "../../../shared/utils/profile";
 
 interface GroupRowProps {
   groupData: GroupData;
@@ -12,7 +11,7 @@ interface GroupRowProps {
 
 export default function GroupRow({ groupData }: GroupRowProps) {
   const navigate = useNavigate();
-  const authorName = GetDisplayName(
+  const authorName = userFormatter.GetDisplayName(
     groupData.author?.name,
     groupData.author?.surname,
   );
@@ -49,10 +48,10 @@ export default function GroupRow({ groupData }: GroupRowProps) {
             justify-center rounded-full
             font-family-header text-[28px] text-(--white)"
             style={{
-              backgroundColor: getAvatarColor(groupData.name),
+              backgroundColor: userFormatter.getAvatarColor(groupData.name),
             }}
           >
-            {groupData.name.charAt(0)}
+            {userFormatter.GetAvatarLetter(groupData.name, groupData.author?.surname)}
           </div>
 
           {/* Main info */}
