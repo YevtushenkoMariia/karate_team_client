@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "../pages/Login";
@@ -12,51 +11,14 @@ import Statistics from "../pages/Statistics";
 import Messages from "../pages/Messages";
 import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
-import AppLayout from "../components/AppLayout";
-import type { Role } from "../types/auth.types";
-import { TOKEN_KEY, USER_KEY } from "../constants/storage";
+import AppLayout from "../shared/layout/AppLayout";
 
-function getStoredUser(): { role: Role } | null {
-  const raw = localStorage.getItem(USER_KEY);
+import ProtectedRoute from "./ProtectedRoute";
+import RoleRoute from "./RoleRoute";
 
-  if (!raw) {
-    return null;
-  }
+import type { Role } from "../features/auth/types/auth.types";
 
-  try {
-    return JSON.parse(raw) as { role: Role };
-  } catch {
-    return null;
-  }
-}
-
-function ProtectedRoute({ children }: { children: ReactNode }) {
-  const token = localStorage.getItem(TOKEN_KEY);
-
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <>{children}</>;
-}
-
-function RoleRoute({
-  children,
-  allowedRoles,
-}: {
-  children: ReactNode;
-  allowedRoles: Role[];
-}) {
-  const user = getStoredUser();
-
-  if (!user || !allowedRoles.includes(user.role)) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return <>{children}</>;
-}
-
-const appRoles: Role[] = ["ADMIN", "COACH", "SPORTSMAN"];
+const APP_ROLES: Role[] = ["ADMIN", "COACH", "SPORTSMAN"];
 
 export default function AppRouter() {
   return (
@@ -69,7 +31,7 @@ export default function AppRouter() {
       <Route
         element={
           <ProtectedRoute>
-            <RoleRoute allowedRoles={appRoles}>
+            <RoleRoute allowedRoles={APP_ROLES}>
               <AppLayout />
             </RoleRoute>
           </ProtectedRoute>

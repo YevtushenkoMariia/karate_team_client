@@ -1,5 +1,5 @@
-import MainContent from "../components/main/MainContent";
-import PageShell from "../components/PageShell";
+import MainContent from "../features/main/components/MainContent";
+import PageShell from "../shared/components/PageShell";
 
 export default function Home() {
   return <PageShell title="Головна" children={<MainContent/>}/>;

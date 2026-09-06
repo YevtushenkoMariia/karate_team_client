@@ -1,4 +1,4 @@
-import type {LocationOption} from "../types/locations.type"
+import type {LocationOption} from "../features/profile/types/locations.type"
 
 export const STATUS_OPTIONS = [
   { value: "JUST_TRAIN", label: "Тренуюсь" },
