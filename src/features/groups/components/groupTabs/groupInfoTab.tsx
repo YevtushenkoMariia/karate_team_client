@@ -23,6 +23,9 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
     group?.author?.surname,
   );
 
+  const avatarLetter = userFormatter.GetAvatarLetter(group.name, group.author?.surname)
+ 
+
   const [copied, setCopied] = useState(false);
 
   const handleCopyCode = async () => {
@@ -49,12 +52,12 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
       <div
         className={clsx(
           "flex h-20 w-20 shrink-0 items-center justify-center",
-          "rounded-full font-family-header text-[28px] text-(--white)",
+          "rounded-full font-family-header text-[28px] text-section-title text-(--white)",
           isMobile ? "self-center" : "",
         )}
         style={{ backgroundColor: userFormatter.getAvatarColor(group.name) }}
       >
-        {userFormatter.GetAvatarLetter(group.name, group.author?.surname)}
+        {avatarLetter}
       </div>
 
       <div className="flex min-w-0 flex-col gap-2">

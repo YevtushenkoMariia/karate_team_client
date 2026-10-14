@@ -13,13 +13,13 @@ export type GroupRequest = {
 };
 
 export type GroupAuthor = {
-  id?: string | number;
+  id?: string;
   name: string;
   surname: string;
 };
 
 export type GroupData = {
-  id: number;
+  id: string;
   name: string;
   code: string;
   membersCount: number;
@@ -37,7 +37,7 @@ export type GroupMembersRequest = {
 };
 
 export type GroupMember = {
-  id: string | number;
+  id: string;
   name: string;
   surname: string;
   role: Role;

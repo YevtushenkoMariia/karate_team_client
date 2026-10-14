@@ -45,8 +45,8 @@ export default function GroupRow({ groupData }: GroupRowProps) {
           {/* Avatar */}
           <div
             className="flex h-20 w-20 shrink-0 items-center
-            justify-center rounded-full
-            font-family-header text-[28px] text-(--white)"
+            justify-center rounded-full text-[28px]
+            font-family-header text-section-title text-(--white)"
             style={{
               backgroundColor: userFormatter.getAvatarColor(groupData.name),
             }}

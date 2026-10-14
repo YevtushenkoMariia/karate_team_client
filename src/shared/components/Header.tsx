@@ -65,7 +65,7 @@ export default function Header({
             className="flex h-9 w-9 items-center justify-center rounded-full  
             text-sm font-bold text-(--white)"
             style={{ fontFamily: "var(--font-family-header)", 
-              backgroundColor: userFormatter.getAvatarColor(avatarLetter), }}
+              backgroundColor: userFormatter.getAvatarColor(displayName), }}
              
           >
             {avatarLetter}

@@ -49,31 +49,31 @@ export class GroupsApi implements IGroupApi {
 
     console.log(`Fetching members for userId: ${userId}, groupId: ${groupId}`);
 
-    // const response = await api.get(`/api/${userId}/groups/${groupId}/members`);
+    const response = await api.get(`/api/${userId}/groups/${groupId}/members`);
 
-    const response: GroupMember[] = [
-        {
-            id: 1,
-            name: "John",
-            surname: "Doe",
-            role: 'ADMIN',
-        },
-        {
-            id: 2,
-            name: "Jane",
-            surname: "Smith",
-            role: 'SPORTSMAN',
-        },
-        {
-            id: 3,
-            name: "Alice",
-            surname: "Johnson",
-            role: 'SPORTSMAN',
-        }
-    ]
+    // const response: GroupMember[] = [
+    //     {
+    //         id: 1,
+    //         name: "John",
+    //         surname: "Doe",
+    //         role: 'ADMIN',
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Jane",
+    //         surname: "Smith",
+    //         role: 'SPORTSMAN',
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Alice",
+    //         surname: "Johnson",
+    //         role: 'SPORTSMAN',
+    //     }
+    // ]
 
     console.log("getGroupMembers response:", response);
-    return response;
+    return response.data;
   }
 }
 

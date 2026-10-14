@@ -4,6 +4,9 @@ import { type RegisterRequest } from "../types/auth.types";
 
 export const login = async (credentials: LoginRequest) => {
   const response = await api.post("/api/auth/login", credentials);
+  
+  console.log(response);
+  
   return response.data;
 };
 
