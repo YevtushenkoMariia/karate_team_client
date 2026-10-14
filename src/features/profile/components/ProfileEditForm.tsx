@@ -4,17 +4,17 @@ import type {
   ProfileLocation,
   ProfileSportsmanData,
 } from "../types/profile.types";
-import { KarateLevel } from "../../../shared/types/karate_level";
-import { karateLevelConvertor } from "../../../shared/utils/sportsmen";
-import { getCities, getClubs } from "../../../api/locations";
+import { KarateLevel } from "@/shared/types/karate_level";
+import { karateLevelConvertor } from "@/shared/utils/sportsmen";
+import { getCities, getClubs } from "../api/locations.api";
 import {
   STATUS_OPTIONS,
   FALLBACK_CLUBS,
   FALLBACK_CITIES,
-} from "../../../constants/profile";
+} from "../constants/profile.constants";
 import type { LocationOption } from "../types/locations.type";
-import { userFormatter } from "../../../shared/utils/profile";
-import { normalizeOptions } from "../../../shared/utils/locations";
+import { userFormatter } from "@/shared/utils/profile";
+import { normalizeOptions } from "../utils/locations";
 import FieldRow from "./FieldRow";
 
 type ProfileDraft = Partial<

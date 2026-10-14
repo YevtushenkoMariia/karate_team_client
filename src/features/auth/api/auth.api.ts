@@ -1,4 +1,4 @@
-import api from "../../../shared/api/axios.api";
+import api from "@/shared/api/axios.api";
 import { type LoginRequest } from "../types/auth.types";
 import { type RegisterRequest } from "../types/auth.types";
 

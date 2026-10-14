@@ -1,7 +1,7 @@
 import { type GroupMember } from "../types/groups.types";
 import clsx from "clsx";
 import { UserRound } from "lucide-react";
-import { userFormatter } from "../../../shared/utils/profile";
+import { userFormatter } from "@/shared/utils/profile";
 
 type GroupMemberRowProps = {
   member: GroupMember;

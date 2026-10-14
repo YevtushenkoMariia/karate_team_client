@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { groupService } from "../services/groups.services";
 import type { GroupData, GroupsRequest } from "../types/groups.types";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 
 export function useGroups() {
   const { user } = useAuth();

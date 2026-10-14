@@ -2,7 +2,7 @@ import { Users, UserRound, MoreVertical } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import type { GroupData } from "../types/groups.types";
-import {  userFormatter } from "../../../shared/utils/profile";
+import {  userFormatter } from "@/shared/utils/profile";
 
 interface GroupRowProps {
   groupData: GroupData;

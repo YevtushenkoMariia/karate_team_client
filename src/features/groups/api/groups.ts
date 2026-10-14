@@ -6,7 +6,7 @@ import type {
   JoinGroupRequest,
   GroupMember,
 } from "../types/groups.types";
-import api from "../../../shared/api/axios.api";
+import api from "@/shared/api/axios.api";
 import type { IGroupApi } from "./group.interface";
 
 export class GroupsApi implements IGroupApi {

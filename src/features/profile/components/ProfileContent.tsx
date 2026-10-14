@@ -9,20 +9,20 @@ import type {
   ProfileLocation,
   ProfileUpdateRequest,
 } from "../types/profile.types";
-import { useMediaQuery } from "../../../shared/hooks/useMediaQuery";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import clsx from "clsx";
 import {
   karateLevelConvertor,
   sportsmeStatusConvertor,
-} from "../../../shared/utils/sportsmen";
+} from "@/shared/utils/sportsmen";
 import {
   userFormatter,
-} from "../../../shared/utils/profile";
+} from "@/shared/utils/profile";
 import FieldRow from "./FieldRow";
-import { toISOdate } from "../../../shared/utils/dataFormatter";
-import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
-import { useAuth } from "../../auth/hooks/useAuth";
-import type { Role } from "../../../shared/types/roles";
+import { toISOdate } from "@/shared/utils/dataFormatter";
+import { MOBILE_SIZE, TABLET_SIZE } from "@/shared/constants/mediaQuery";
+import { useAuth } from "@/features/auth";
+import type { Role } from "@/shared/types/roles";
 
 type ProfileDraft = Partial<
   Omit<ProfileSportsmanData, "role"> & Omit<ProfileCoachData, "role">

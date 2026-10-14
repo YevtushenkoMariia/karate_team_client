@@ -2,10 +2,10 @@ import { useState } from "react";
 import {
   MOBILE_SIZE,
   TABLET_SIZE,
-} from "../../../../shared/constants/mediaQuery";
-import { useMediaQuery } from "../../../../shared/hooks/useMediaQuery";
-import { formatMembersCount } from "../../../../shared/utils/dataFormatter";
-import {  userFormatter } from "../../../../shared/utils/profile";
+} from "@/shared/constants/mediaQuery";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import { formatMembersCount } from "@/shared/utils/dataFormatter";
+import {  userFormatter } from "@/shared/utils/profile";
 import type { GroupData } from "../../types/groups.types";
 import { Check, Copy, UserRound, Users } from "lucide-react";
 import clsx from "clsx";

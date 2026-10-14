@@ -1,8 +1,8 @@
 import { Bell, Menu, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logoSvg.svg";
-import { userFormatter } from "../utils/profile";
-import { useAuth } from "../../features/auth/hooks/useAuth";
+import logo from "@/assets/logoSvg.svg";
+import { userFormatter } from "@/shared/utils/profile";
+import { useAuth } from "@/features/auth";
 
 type HeaderProps = {
   onMenuClick?: () => void;

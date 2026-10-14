@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { User, Lock, EyeIcon, EyeOffIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import FormField from "../../../shared/components/FormField";
+import FormField from "@/shared/components/FormField";
 import { authService } from "../services/auth.service";
 import { useAuth } from "../hooks/useAuth";
 

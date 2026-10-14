@@ -2,7 +2,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useAuth } from "../../../auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 import { groupService } from "../../services/groups.services";
 import type {
   GroupMember,
