@@ -1,7 +1,7 @@
 
 
 type GroupPlansTabProps = {
-  groupId: number;
+  groupId: string;
 };
 
 export default function GroupPlansTab({ groupId }: GroupPlansTabProps) {

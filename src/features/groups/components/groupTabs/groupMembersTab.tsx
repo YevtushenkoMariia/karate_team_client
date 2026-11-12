@@ -11,7 +11,7 @@ import type {
 import GroupMemberRow from "../GroupMemberRow";
 
 type GroupMembersTabProps = {
-  groupId: number;
+  groupId: string;
 };
 
 export default function GroupMembersTab({ groupId }: GroupMembersTabProps) {

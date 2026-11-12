@@ -6,7 +6,7 @@ import {  userFormatter } from "@/shared/utils/profile";
 
 interface GroupRowProps {
   groupData: GroupData;
-  id: number;
+  id: string;
 }
 
 export default function GroupRow({ groupData }: GroupRowProps) {
