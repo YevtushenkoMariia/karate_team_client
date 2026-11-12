@@ -1,5 +1,5 @@
 
-import type { Role } from "../../../shared/types/roles";
+import type { Role } from "@/shared/types/roles";
 
 export type LoginRequest = {
   email: string;

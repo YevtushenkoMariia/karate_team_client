@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useMediaQuery } from "../hooks/useMediaQuery";
-import Header from "../components/Header";
-import NavigationSideBar from "../components/NavigationSideBar";
-import { DESKTOP_SIZE } from "../constants/mediaQuery";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import Header from "./Header";
+import NavigationSideBar from "./NavigationSideBar";
+import { DESKTOP_SIZE } from "@/shared/constants/mediaQuery";
 
 export default function AppLayout() {
   const isDesktop = useMediaQuery(DESKTOP_SIZE);

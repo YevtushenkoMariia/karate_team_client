@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { groupService } from "../services/groups.services";
 import type { GroupData } from "../types/groups.types";
 import TABS, { type GroupTab } from "../constants/groupsTabs.constants";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 import GroupInfoTab from "./groupTabs/groupInfoTab";
 import GroupMembersTab from "./groupTabs/groupMembersTab";
 import GroupPlansTab from "./groupTabs/groupPlansTab";

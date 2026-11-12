@@ -1,11 +1,11 @@
 import GroupRow from "./GroupRow";
-import { useMediaQuery } from "../../../shared/hooks/useMediaQuery";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { Plus, UserPlus } from "lucide-react";
 import { useState } from "react";
 import JoinGroupModal from "./JoinGroupModal";
-import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
+import { MOBILE_SIZE, TABLET_SIZE } from "@/shared/constants/mediaQuery";
 import { useGroups } from "../hooks/useGroups";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 
 export default function GroupContent() {
   const isMobile = useMediaQuery(MOBILE_SIZE);

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 import clsx from 'clsx'
-import loginIllustration from '../../../assets/logoSvg.svg'
-import redWaves from '../../../assets/redWavesSvg.svg'
-import greenWaves from '../../../assets/greenWavesSvg.svg'
-import { useMediaQuery } from '../../../shared/hooks/useMediaQuery'
-import { MOBILE_SIZE, TABLET_SIZE } from "../../../shared/constants/mediaQuery";
+import loginIllustration from '@/assets/logoSvg.svg'
+import redWaves from '@/assets/redWavesSvg.svg'
+import greenWaves from '@/assets/greenWavesSvg.svg'
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery'
+import { MOBILE_SIZE, TABLET_SIZE } from "@/shared/constants/mediaQuery";
 
 
 type AuthLayoutProps = {

@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
 
-import type { Role } from "../shared/types/roles";
-import { useAuth } from "../features/auth/hooks/useAuth";
+import type { Role } from "@/shared/types/roles";
+import { useAuth } from "@/features/auth";
 
 type RoleRouteProps = {
   children: ReactNode;

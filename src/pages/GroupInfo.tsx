@@ -1,4 +1,4 @@
-import GroupInfoContent from "../features/groups/components/GroupInfoContent";
+import { GroupInfoContent } from "@/features/groups";
 
 export default function GroupInfo() {
   return <GroupInfoContent />;

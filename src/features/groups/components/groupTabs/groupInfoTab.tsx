@@ -2,10 +2,10 @@ import { useState } from "react";
 import {
   MOBILE_SIZE,
   TABLET_SIZE,
-} from "../../../../shared/constants/mediaQuery";
-import { useMediaQuery } from "../../../../shared/hooks/useMediaQuery";
-import { formatMembersCount } from "../../../../shared/utils/dataFormatter";
-import {  userFormatter } from "../../../../shared/utils/profile";
+} from "@/shared/constants/mediaQuery";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import { formatMembersCount } from "@/shared/utils/dataFormatter";
+import {  userFormatter } from "@/shared/utils/profile";
 import type { GroupData } from "../../types/groups.types";
 import { Check, Copy, UserRound, Users } from "lucide-react";
 import clsx from "clsx";
@@ -22,6 +22,9 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
     group?.author?.name,
     group?.author?.surname,
   );
+
+  const avatarLetter = userFormatter.GetAvatarLetter(group.name, group.author?.surname)
+ 
 
   const [copied, setCopied] = useState(false);
 
@@ -49,12 +52,12 @@ export default function GroupInfoTab({ group }: GroupInfoTabProps) {
       <div
         className={clsx(
           "flex h-20 w-20 shrink-0 items-center justify-center",
-          "rounded-full font-family-header text-[28px] text-(--white)",
+          "rounded-full font-family-header text-[28px] text-section-title text-(--white)",
           isMobile ? "self-center" : "",
         )}
         style={{ backgroundColor: userFormatter.getAvatarColor(group.name) }}
       >
-        {userFormatter.GetAvatarLetter(group.name, group.author?.surname)}
+        {avatarLetter}
       </div>
 
       <div className="flex min-w-0 flex-col gap-2">

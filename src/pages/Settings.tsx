@@ -1,5 +1,5 @@
-import PageShell from "../shared/components/PageShell";
-import SettingsContent from "../features/settings/components/SettingsContent";
+import PageShell from "@/shared/components/PageShell";
+import { SettingsContent } from "@/features/settings";
 
 
 export default function Settings() {

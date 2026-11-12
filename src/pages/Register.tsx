@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import AuthCard from '../features/auth/components/AuthCard'
-import AuthLayout from '../features/auth/components/AuthLayout'
-import RegisterForm from '../features/auth/components/RegisterForm'
+import { AuthCard, AuthLayout, RegisterForm } from '@/features/auth'
 
 export default function Register() {
   const navigate = useNavigate()

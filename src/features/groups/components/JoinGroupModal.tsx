@@ -1,9 +1,9 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Hash, X } from "lucide-react";
-import FormField from "../../../shared/components/FormField";
+import FormField from "@/shared/components/FormField";
 import { groupService } from "../services/groups.services";
 import axios from "axios";
-import { useAuth } from "../../auth/hooks/useAuth";
+import { useAuth } from "@/features/auth";
 import type { JoinGroupRequest } from "../types/groups.types";
 
 type JoinGroupModalProps = {

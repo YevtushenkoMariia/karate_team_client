@@ -1,4 +1,4 @@
-import type {LocationOption} from "../../features/profile/types/locations.type"
+import type {LocationOption} from "../types/locations.type"
 
 export function normalizeOptions(payload: unknown): LocationOption[] {
   if (Array.isArray(payload)) {

@@ -1,5 +1,5 @@
-import { type Role } from "../../../shared/types/roles";
-import { type KarateLevel } from "../../../shared/types/karate_level";
+import { type Role } from "@/shared/types/roles";
+import { type KarateLevel } from "@/shared/types/karate_level";
 
 export type ProfileLocation = {
   id: string | number;

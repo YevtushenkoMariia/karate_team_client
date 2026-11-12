@@ -1,7 +1,7 @@
 import { type GroupMember } from "../types/groups.types";
 import clsx from "clsx";
 import { UserRound } from "lucide-react";
-import { userFormatter } from "../../../shared/utils/profile";
+import { userFormatter } from "@/shared/utils/profile";
 
 type GroupMemberRowProps = {
   member: GroupMember;
@@ -10,11 +10,12 @@ type GroupMemberRowProps = {
 export default function GroupMemberRow({ member }: GroupMemberRowProps) {
   const displayName = userFormatter.GetDisplayName(member.name, member.surname);
 
+const avatarLetter   = userFormatter.GetAvatarLetter(member.name, member.surname);
   return (
     <div
       key={member.id}
       className={clsx(
-        "flex items-center gap-2 border-2 border-(--grey)",
+        "flex items-center gap-4 border-2 border-(--grey)",
         "rounded-[20px] p-4 bg-(-white) shadow-xs transition-all duration-200",
         "hover:-translate-y-0.5 hover:border-(--light-grey) hover:shadow-md active:scale-[0.99]",
         "cursor-pointer w-full",
@@ -30,7 +31,7 @@ export default function GroupMemberRow({ member }: GroupMemberRowProps) {
           backgroundColor: userFormatter.getAvatarColor(displayName),
         }}
       >
-        {userFormatter.GetAvatarLetter(member.name, member.surname)}
+        {avatarLetter}
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1">

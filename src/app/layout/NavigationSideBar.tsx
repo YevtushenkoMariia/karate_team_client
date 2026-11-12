@@ -1,10 +1,10 @@
 import { PanelLeftClose } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import logo from "../../assets/logoSvg.svg";
-import { NAV_ITEMS } from "../constants/navigation";
-import { useAuth } from "../../features/auth/hooks/useAuth";
-import { getNavItems } from "../utils/navigation";
+import logo from "@/assets/logoSvg.svg";
+import { NAV_ITEMS } from "@/shared/constants/navigation";
+import { useAuth } from "@/features/auth";
+import { getNavItems } from "@/shared/utils/navigation";
 
 type NavigationSideBarProps = {
   open: boolean;

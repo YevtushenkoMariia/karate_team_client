@@ -1,22 +1,22 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Home from "../pages/Home";
-import Plans from "../pages/Plans";
-import Groups from "../pages/Groups";
-import GroupInfo from "../pages/GroupInfo";
-import Sportsmens from "../pages/Sportsmens";
-import Statistics from "../pages/Statistics";
-import Messages from "../pages/Messages";
-import Profile from "../pages/Profile";
-import Settings from "../pages/Settings";
-import AppLayout from "../shared/layout/AppLayout";
+import Login from "@/pages/Login";
+import Register from "@/pages/Register";
+import Home from "@/pages/Home";
+import Plans from "@/pages/Plans";
+import Groups from "@/pages/Groups";
+import GroupInfo from "@/pages/GroupInfo";
+import Sportsmens from "@/pages/Sportsmens";
+import Statistics from "@/pages/Statistics";
+import Messages from "@/pages/Messages";
+import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
+import AppLayout from "../layout/AppLayout";
 
 import ProtectedRoute from "./ProtectedRoute";
 import RoleRoute from "./RoleRoute";
 
-import { APP_ROLES } from "../shared/constants/appRoles";
+import { APP_ROLES } from "@/shared/constants/appRoles";
 
 export default function AppRouter() {
   return (
