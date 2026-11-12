@@ -1,5 +1,6 @@
-import PageShell from "../components/PageShell";
+import PageShell from "@/shared/components/PageShell";
+import { SportsmensContent } from "@/features/sportsmens";
 
 export default function Sportsmens() {
-  return <PageShell title="Спортсмени" />;
+  return <PageShell title="Спортсмени" children={<SportsmensContent />} />;
 }

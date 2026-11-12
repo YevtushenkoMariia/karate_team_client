@@ -1,5 +1,7 @@
-import PageShell from "../components/PageShell";
+import PageShell from "@/shared/components/PageShell";
+import { SettingsContent } from "@/features/settings";
 
-export default function Statistics() {
-  return <PageShell title="Налаштування" />;
+
+export default function Settings() {
+  return <PageShell title="Налаштування" children={<SettingsContent />} />;
 }
